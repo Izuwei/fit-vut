@@ -1,4 +1,4 @@
-# 1. Projekt WEDI
+# 1. Projekt wedi
 
 #### Zadání:  
 Cílem úlohy je vytvořit skript (tzv. wrapper), který bude spouštět textový editor.
