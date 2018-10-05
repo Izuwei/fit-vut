@@ -22,9 +22,9 @@ kde:
 • R je počet procesů riders; A > 0.  
 • C je kapacita autobusu; C > 0.  
 • ART je maximální hodnota doby (v milisekundách), po které je generován nový proces rider;  
-ART >= 0 && ART <= 1000.
+ART >= 0 && ART <= 1000.  
 • ABT je maximální hodnota doby (v milisekundách), po kterou proces bus simuluje jízdu;  
-ABT >= 0 && ABT <= 1000.
+ABT >= 0 && ABT <= 1000.  
 • Všechny parametry jsou celá čísla  
 
 #### Hodnocení: 15/15b
