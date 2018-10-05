@@ -45,4 +45,11 @@ bude vytvořen včetně cesty k danému souboru (pokud i ta neexistuje).
 proměnná EDITOR nastavená, respektuje proměnnou VISUAL. Pokud ani ta
 není nastavená, použije se příkaz vi.
 
+### Poznámky:
+
+• Skript nebere v potaz soubory, se kterými dříve počítal a které jsou nyní
+smazané.  
+• Při rozhodování relativní cesty adresáře je doporučené používat reálnou
+cestu (realpath).  
+
 #### Hodnocení: 15/15b
