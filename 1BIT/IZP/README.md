@@ -7,4 +7,4 @@
   Hodnocení: 6,68/7b
 
 3. Projekt: Jednoduchá shluková analýza
-  Hodnocení: 7,4/10b
+  Hodnocení: 7,4/10b 
