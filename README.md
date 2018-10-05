@@ -1,6 +1,6 @@
 # FIT-VUT
 
-<span style="color:red;">Zdrojové kódy jsou určeny pouze ke studijním účelům, nikoliv ke kopírování! Plagiátorství je na FIT VUT přísně trestáno.</span>
+<p style="color:red;">Zdrojové kódy jsou určeny pouze ke studijním účelům, nikoliv ke kopírování! Plagiátorství je na FIT VUT přísně trestáno.</p>
 
 ## 1BIT - První semestr
 ### IEL
