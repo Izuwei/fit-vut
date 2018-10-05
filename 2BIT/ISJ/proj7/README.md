@@ -1,6 +1,7 @@
 # 7. Projekt
 
 ### Zadání:  
+Implementujte:  
 1. dekorátor ```@limit_calls``` s parametry max_calls a error_message_tail (defaultní hodnoty 2 a 'called too often') pro obecné funkce tak, aby např.:  
   
 > import math  
