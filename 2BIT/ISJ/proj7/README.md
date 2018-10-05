@@ -3,8 +3,8 @@
 ### Zadání:  
 1. dekorátor @limit_calls s parametry max_calls a error_message_tail (defaultní hodnoty 2 a 'called too often') pro obecné funkce tak,
 aby např.:  
->
-import math  
+  
+> import math  
   
 @limit_calls(1, 'that is too much')  
 def pyth(a,b):  
@@ -16,7 +16,7 @@ print(pyth(6,8))
   
 Vypsalo např:  
 
-5.0  
+>5.0  
 Traceback (most recent call last):  
   File "isj_proj07_xnovak01.py", line 43, in <module>  
     print(pyth(6,8))  
