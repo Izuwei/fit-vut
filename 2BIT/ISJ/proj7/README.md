@@ -28,7 +28,8 @@ __main__.TooManyCallsError: function "pyth" - that is too much
 udávajícím, z kterého iterovatelného objektu má prvek na dané pozici být, a bude vybírat prvky v zadaném pořadí
 (první iterovatelný objekt má v selector index 0).  
 Například tedy:  
-```print(list(ordered_merge('abcde', [1, 2, 3], (3.0, 3.14, 3.141), range(11, 44, 11), selector = [2,3,0,1,3,1])))```  
+>print(list(ordered_merge('abcde', [1, 2, 3], (3.0, 3.14, 3.141), range(11, 44, 11), selector = [2,3,0,1,3,1])))   
+
 vypíše  
 >[3.0, 11, 'a', 1, 22, 2]  
   
