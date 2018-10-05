@@ -1,6 +1,6 @@
 # Návrh číslicových systémů
 
-### Projekt: Přístupový terminál
+### Projekt - Přístupový terminál
 
 #### Zadání:
 Přístupový terminál je jednoduché elektronické zařízení, které povoluje oprávněným
