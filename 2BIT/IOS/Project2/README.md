@@ -13,13 +13,13 @@ Příklad: Kapacita autobusu je 10, čekajících osob je 8. Přijíždí autobu
 další 3 osoby. Nastoupí pouze 8 čekajících osob, autobus odjíždí a nově příchozí 3 osoby čekají na zastávce.
 
 ### Detaily:
-• Každé osobě odpovídá jeden proces rider.  
+>• Každé osobě odpovídá jeden proces rider.  
 • Autobus je reprezentován procesem bus. V systému je právě jeden autobus.  
 
 ### Spuštění:
-###### $ ./proj2 R C ART ABT
+```$ ./proj2 R C ART ABT```
 kde:  
-• R je počet procesů riders; A > 0.  
+>• R je počet procesů riders; A > 0.  
 • C je kapacita autobusu; C > 0.  
 • ART je maximální hodnota doby (v milisekundách), po které je generován nový proces rider;  
 ART >= 0 && ART <= 1000.  
