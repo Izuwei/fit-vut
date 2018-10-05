@@ -4,9 +4,9 @@
 can_be_a_set_member_or_frozenset(item) - vrátí vstupní položku item, pokud tato může být prvkem množiny v Pythonu,
 v opačném případě frozenset(item)  
 Můžete si zkusit:  
-    assert can_be_a_set_member_or_frozenset(1) == 1  
-    assert can_be_a_set_member_or_frozenset((1,2)) == (1,2)  
-    assert can_be_a_set_member_or_frozenset([1,2]) == frozenset([1,2])  
+        assert can_be_a_set_member_or_frozenset(1) == 1  
+        assert can_be_a_set_member_or_frozenset((1,2)) == (1,2)  
+        assert can_be_a_set_member_or_frozenset([1,2]) == frozenset([1,2])  
 V Pythonu nemůže být prvkem množiny jiná množina. Měli byste vědět proč.  
       
 all_subsets(lst) - na vstupu dostane seznam a pouze s použitím vestavěných funkcí (tedy bez použití "import")
