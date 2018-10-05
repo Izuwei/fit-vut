@@ -1,0 +1,239 @@
+#!/bin/sh
+#IOS 1. Projekt - Wedi
+#AUTOR: Jakub Sadilek
+#LOGIN: XSADIL07
+#DATE: 28.3.2018
+#===========================VARIABLES================================
+export POSIXLY_CORRECT=yes
+TOOL="vi"                         #Implicitni editor "vi"
+#========================EDITOR & WEDI_RC============================
+#Osetreni promnenych a souboru wedirc
+realpath . > /dev/null 2>&1
+rp_test=$?
+if [ "$rp_test" -ne 0 ]         #Kontrola utility realpath
+then
+    echo "Utilita realpath neni dostupna">&2
+    exit $rp_test
+elif [ -z "$WEDI_RC" ]  #Kontrola jestli neni promena WEDI_RC prazdna
+then
+    echo "Nebyla zadana cesta pro wedirc v promene WEDI_RC">&2
+    exit 1
+fi
+wedi_path=$(dirname "$WEDI_RC")   #wedi_path= cesta k souboru wedirc
+if [ ! -d "$wedi_path" ] || [ ! -f "$WEDI_RC" ]
+then                    #Pokud neexistuje wedirc, tak ho vytvorime
+    mkdir -p "$wedi_path"
+    touch "$WEDI_RC"
+fi
+if [ -f "$WEDI_RC" ] && [ ! -w "$WEDI_RC" ]
+then                                        #Kontrola zapisu do wedirc
+    echo "Nelze zapisovat do $WEDI_RC">&2
+    exit 1
+elif [ -f "$WEDI_RC" ] && [ ! -r "$WEDI_RC" ]
+then                                        #Kontrola cteni z wedirc
+    echo "Nelze cist z $WEDI_RC">&2
+    exit 1
+elif [ ! -z "$EDITOR" ]                     #EDITOR != 0, TOOL<-EDITOR
+then
+    TOOL=$EDITOR
+elif [ -z "$EDITOR" ] && [ ! -z "$VISUAL" ] #EDITOR==0, tak TOOL<-VISUAL
+then
+    TOOL=$VISUAL
+fi
+#==============================LOG====================================
+#Zapis LOGu do WEDI_RC
+#Format: YYYY-MM-DD HH:MM:SS.m realpath
+add_log(){                 # $1 realpath
+    if [ "$(uname)" = "FreeBSD" ] #Podle platformy zvolime typ fun. pro data
+    then
+        echo "$(gdate +%Y-%m-%d\ %H:%M:%S.%1N) $(realpath "$1")" >> "$WEDI_RC"
+    else
+        echo "$(date +%Y-%m-%d\ %H:%M:%S.%1N) $(realpath "$1")" >> "$WEDI_RC"
+    fi
+}
+#==============================EDIT===================================
+#Spusti se editace souboru v nastavenem editoru
+edit(){
+   $TOOL "$1"                 # $1=realpath
+   retval=$?                #Ulozeni navratove hodnoty
+   if [ "$retval" -eq 0 ]   #Pokud nastala chyba -> Konec
+   then
+       add_log "$1"           #Zapis logu
+   else                     #Chybove hlaseni
+       echo "Zadany editor $TOOL nelze nalezt">&2
+   fi
+   exit $retval             #Vracime navratovou hodnotu
+}
+#========================LAST EDITED FILE=============================
+#Spusti editaci posledniho souboru v danem adresari
+last(){                 # $1 Zadana cesta
+    #files= serazeny list vsech zaznamu z adresare
+    files=$(grep "$1/[^/]*$" "$WEDI_RC" | awk '{ print $3 }' | sed '1!G;h;$!d')
+    for file in $files
+    do
+        if [ -f "$file" ]   #Kontrolujeme zda zaznam stale existuje
+        then
+            edit "$file"      #Pokud existuje, spoustime editaci
+        fi
+    done
+    echo "Posledni editovany soubor v $1 neexistuje">&2
+    exit 1                  #Pokud zadny zaznam neprosel -> chyba
+}
+#==========================PRINT EDITED===============================
+#Vypise soubory editovane v adresari
+print_edited(){         #$1 adresar
+    files=$(grep "$1/[^/]*$" "$WEDI_RC" | awk '{ print $3 }' | sort | uniq)
+    #files= Extrakce unikatnich nazvu vcetne cest
+    if [ -z "$files" ]  #Kontrola zda-li vubec existuji nejake zaznamy
+    then
+        echo "Jeste zde nebyl editovan zadny soubor">&2
+        exit 1
+    fi
+    for file in $files  #Kontrola zda soubory stale existuji
+    do
+        if [ -f "$file" ]
+        then            #Pokud existuji tak vypisujeme
+            echo "$file" | rev | cut -d "/" -f 1 | rev 
+        fi
+    done
+    exit 0
+}
+#===========================MOST EDITED===============================
+#Vypise nejvice editovany soubor v zadanem adresari
+most_edited(){          #$1 adresar
+    files=$(grep "$1/[^/]*$" "$WEDI_RC" | awk '{ print $3 }' | sort | uniq -c | sed 's/ *//' | sort -n | sed '1!G;h;$!d' | cut -d " " -f 2) #Serazeny list unikatnich zaznamu v adresari
+    for file in $files                     #Kontrolujeme jestli zaznam stale existuje
+    do
+        if [ -f "$file" ]
+        then
+            edit "$file"                     #Spusteni editace
+        fi
+    done
+    echo "Zadny soubor nebyl zde editovan">&2         #Pokud zadny zaznam neprosel -> chyba
+    exit 1
+}
+#=============================DATE====================================
+#Funkce zkontroluje format datumu
+check_date(){   # $1=datum
+    argdate=$(echo "$1" | egrep "^[0-9]{4}-[0-9]{2}-[0-9]{2}$") #Kontrola data
+    if [ -z "$argdate" ]    #Pokud datum neodpovida vzoru -> chyba
+    then
+        echo "Spatny format datumu. Spravne je: YYYY-MM-DD">&2
+        exit 1
+    fi
+}
+#=========================BEFORE & AFTER==============================
+#Fun. rozhodne jaka data se budou tisknout podle prepinace (a:b)
+print_dates(){  #&1=datum; $2=adresar; &3=prepinac
+    arg_date=$(echo "$1" | sed 's/-//g')          #Hodnota zadaneho datumu
+    dates=$(grep "$2/[^/]*$" "$WEDI_RC" | awk '{ print $1 }' | sort | uniq)
+    #dates= seznam unikatnich datumu z wedirc
+    for date in $dates
+    do
+        date_value=$(echo "$date" | sed 's/-//g') #hodnota datumu z dates
+        if [ "$3" = "-a" ] && [ "$date_value" -ge "$arg_date" ] #prepinac -a
+        then
+            print_records "$date" "$2"            #Volani fun. pro vypis
+        elif [ "$3" = "-b" ] && [ "$date_value" -lt "$arg_date" ] #prep -b
+        then
+            print_records "$date" "$2"            #Volani fun. pro vypis
+        fi
+    done
+    if [ -z "$to_print" ]   #Kontrola jestli jsme nasli zaznamy
+    then
+        echo "Nebyly nalezeny zadne zaznamy">&2
+        exit 1
+    else    #V retezci zamenime mezery za konce radku, vcetne odstraneni prvni mezery
+        if [ "$(uname)" = "FreeBSD" ]   #Kontrolujeme platformu pro konce radku
+        then    #FreeBSD
+            echo "$to_print" | sed 's/^ //' | sed $'s/ /\\\n/g' | sort | uniq
+        else    #Linux
+            echo "$to_print" | sed 's/^ //' | sed 's/ /\n/g' | sort | uniq
+        fi
+    fi
+    exit 0
+}
+#==========================PRINT RECORDS===============================
+#Najde zaznamy podle parametru, zkontroluje a vypise je
+print_records(){              # $1=datum; $2=adresar
+    file_names=$(grep "$date" "$WEDI_RC" | grep "$2/[^/]*$" | awk '{ print $3 }' | sort | uniq)
+    #file_names= vsechny zaznamy, ktere odpovidaji datu a adresari
+    for file in $file_names   #filenames= un. zaznamy s danym datem
+    do
+        if [ -f "$file" ]     #kontrola jestli soubor existuje
+        then
+            fname=$(echo "$file" | rev | cut -d "/" -f 1 | rev) #Z cesty vybereme nazev
+            to_print="$to_print $fname" #Nazev ulozime do retezce
+        fi
+    done
+}
+#============================CROSSROAD=================================
+#Rozcestnik podle zadanych argumentu
+if [ "$#" -gt 3 ]   #Kontrola poctu argumentu
+then
+    echo "Spatny pocet argmentu">&2
+    exit 1
+elif [ "$#" -eq 0 ] #Aktulani adresar, posledni soubor
+then
+    last "$(pwd -P)"
+elif [ "$#" -eq 1 ] && [ -f "$1" ]  #editace souboru
+then
+    edit "$1"
+elif [ "$#" -eq 1 ] && [ -d "$1" ]  #Posledni v zadanem adresari
+then
+    last "$1"
+elif [ "$1" = "-l" ]                #Prepinac -L
+then
+    if [ "$#" -eq 1 ]               #aktulani adresar
+    then
+        print_edited "$(pwd -P)"
+    elif [ "$#" -eq 2 ] && [ -d "$2" ] #zadany adresar
+    then
+        print_edited "$2"
+    else
+        echo "Spatny adresar nebo argumenty">&2
+        exit 1
+    fi
+elif [ "$1" = "-m" ]                #Prepinac -M
+then
+    if [ "$#" -eq 1 ]               #akt. adresar
+    then
+        most_edited "$(pwd -P)"
+    elif [ "$#" -eq 2 ] && [ -d "$2" ] #zadany adresar
+    then
+        most_edited "$2"
+    else
+        echo "Spatny adresar nebo argumenty">&2
+        exit 1
+    fi
+elif [ "$1" = "-a" ]               #Prepinac -a
+then
+    check_date "$2"
+    if [ "$#" -eq 2 ]              #Akt. adresar
+    then
+        print_dates "$2" "$(pwd -P)" "$1"
+    elif [ "$#" -eq 3 ] && [ -d "$3" ] #Zadany adresar
+    then
+        print_dates "$2" "$3" "$1"
+    else
+        echo "Spatne zadane argumenty nebo neplatny adresar">&2
+        exit 1
+    fi
+elif [ "$1" = "-b" ]               #Prepinac -b
+then
+    check_date "$2"
+    if [ "$#" -eq 2 ]              #Akt. adresar
+    then
+        print_dates "$2" "$(pwd -P)" "$1"
+    elif [ "$#" -eq 3 ] && [ -d "$3" ] #Zadany adresar
+    then
+        print_dates "$2" "$3" "$1"
+    else
+        echo "Spatne zadane argumenty nebo neplatny adresar">&2
+        exit 1
+    fi
+else
+    echo "Spatne zadane argumenty">&2
+    exit 1
+fi
+exit 0
