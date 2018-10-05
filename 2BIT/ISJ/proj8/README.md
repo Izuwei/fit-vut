@@ -17,6 +17,5 @@ https://www.fit.vutbr.cz/study/courses/ISJ/private/para.py a odevzdejte je jako 
 Do souboru ```why.txt``` napište třípísmennou zkratku, která vysvětlí, proč se reálný čas běhu paralelní verze neblíží polovině
 běhu sekvenční verze.  
 Upravte skript ```para.py``` tak, aby reálný čas zpracování odpovídal zhruba polovině času běhu sekvenční verze.
-Upravenou verzi pojmenujte ve formatu ```login_para.py```.
 
 #### Hodnocení: 5/5b
