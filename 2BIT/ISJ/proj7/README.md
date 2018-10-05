@@ -5,8 +5,8 @@
 aby např.:  
   
 > import math  
-  
-@limit_calls(1, 'that is too much')  
+> 
+>@limit_calls(1, 'that is too much')  
 def pyth(a,b):  
     c = math.sqrt(a**2 + b ** 2)  
     return c  
