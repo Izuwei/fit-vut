@@ -7,3 +7,5 @@ Vytvořte stránky pro imaginární zařízení v jedné z následujících obla
 Realitní kancelář  
 
 Zvolte takový název zařízení, aby se neshodoval s názvem žádné existující organizace, kterou lze na WWW již nalézt (viz. Google).  
+
+#### Hodnocení: 29/30b
