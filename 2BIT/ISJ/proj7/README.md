@@ -46,3 +46,5 @@ bylo v souboru mylog.txt:
 Test1  
 Test2  
 End  
+  
+#### Hodnocení: 5/5b
