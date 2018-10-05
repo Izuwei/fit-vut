@@ -1,9 +1,7 @@
 # 6. Projekt
 
 ### Zadání:
-Implementujte:  
-  
-funkci ```first_nonrepeating```, která dostane na vstup řetězec a vrátí první neopakující se znak ze vstupního řetězce:
+Implementujte funkci ```first_nonrepeating```, která dostane na vstup řetězec a vrátí první neopakující se znak ze vstupního řetězce:
 > tooth -> h  
 lool -> None  
   
