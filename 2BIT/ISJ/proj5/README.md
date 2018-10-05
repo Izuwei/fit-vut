@@ -1,7 +1,7 @@
 # 5. Projekt
 
 ### Zadání:  
-implementujte třídu Polynomial, která bude pracovat s polynomy reprezentovanými pomocí seznamů. Například 2x^3 - 3x + 1 bude  reprezentováno jako [1,-3,0,2] (seznam začíná nejnižším řádem, i když se polynomy většinou zapisují opačně).
+Implementujte třídu Polynomial, která bude pracovat s polynomy reprezentovanými pomocí seznamů. Například 2x^3 - 3x + 1 bude  reprezentováno jako [1,-3,0,2] (seznam začíná nejnižším řádem, i když se polynomy většinou zapisují opačně).
     
 Instance třídy bude možné vytvářet několika různými způsoby:  
 pol1 = Polynomial([1,-3,0,2])  
