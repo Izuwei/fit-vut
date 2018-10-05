@@ -17,7 +17,7 @@ další 3 osoby. Nastoupí pouze 8 čekajících osob, autobus odjíždí a nov�
 • Autobus je reprezentován procesem bus. V systému je právě jeden autobus.  
 
 ### Spuštění:
-```$ ./proj2 R C ART ABT```
+```$ ./proj2 R C ART ABT```  
 kde:  
 >• R je počet procesů riders; A > 0.  
 • C je kapacita autobusu; C > 0.  
