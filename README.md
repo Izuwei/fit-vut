@@ -1,4 +1,4 @@
-# Vysoké Učení Technické - Fakulta Informačních Technologií
+# Vysoké učení technické - Fakulta informačních technologií
 
 ##### VAROVÁNÍ: Zdrojové kódy jsou určeny pouze ke studijním účelům, nikoliv ke kopírování! Plagiátorství je na FIT VUT přísně trestáno.
 
