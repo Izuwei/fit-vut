@@ -1,0 +1,272 @@
+﻿/*
+    ITW - 1. Projekt
+    Vytvoril: Jakub Sadilek
+    Login: xsadil07
+    Dne: 2.4.2018
+*/
+body {  /*Telo stranky*/
+    background-image: url("img/pattern.png");
+    margin: 0;
+    font-family: "Crimson Text";
+    font-size: 12pt;
+}
+h1, h2, h3, h4, h5, h6 {    /*Nadpisy*/
+    font-family: Lobster;
+    color: #5D4037;
+}
+header {    /*Min. sirka zahlavi*/
+    min-width: 960px;
+}
+nav {   /*Pozadi horniho menu*/
+    border-top: solid;
+    border-color: #3E2723;
+    border-width: 3px;
+    background: linear-gradient(to right, #FF6F00, #FFA000);
+    height: 45px;
+}
+.menu { /*Rozlozeni menu*/
+    display: flex;
+    margin: 0;
+    align-items: baseline;
+    justify-content: space-between;
+    margin: 0 auto 0 auto;
+    width: 960px;
+}
+.logo span {    /*Skryti nadpisu h1, ale odkaz stale funkcni*/
+    visibility: hidden;
+}
+.logo a {   /*Box odkazu pres cele logo*/
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+}
+.menu h1 {  /*Vymena nadpisu na obrazek*/
+    margin: 0;
+    padding: 0;
+    order: 2;
+    background-image: url("img/logo.png");
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 125px;
+}
+.menu h1, ul {
+    margin: 0;
+    padding: 0;
+}
+.menu a{    /*Pismo v menu*/
+    color: white;
+    text-decoration: none;
+}
+.menu li { /*Zobrazeni listu na radek - menu*/
+    display: inline-block;
+    margin: 10px;
+}
+.menu-left {    /*Pozice v menu (flex)*/
+    order: 1;
+}
+.menu-right {   /*Pozice v menu (flex)*/
+    order: 3;
+}
+#page-title {   /*Pozadi pod menu*/
+    background-image: url("img/bg.png");
+    background-position: center center;
+    background-size: cover;
+    height: 350px;
+}
+#page-title h1 {    /*Nadpis Contact us*/
+    font-size: 45px;
+    padding-top: 140px;
+    padding-bottom: 10px;
+    text-align: center;
+    margin: 0 auto 0 auto;
+    width: 960px;
+}
+#main { /*Zobrazeni stredu stranky*/
+    margin: 0 auto 0 auto;
+    width: 960px;
+}
+.breadcrumb { /*text pod Contact us*/
+    text-align: center;
+    margin: 0 auto 0 auto;
+    width: 960px;
+}
+.main-text.row { /*Vycentrovani textu podle predlohy*/
+    text-align: center;
+    margin-bottom: 30px;
+}
+#main a {   /*Barvy odkazu*/
+    text-decoration: none;
+    color: #FF8F00;
+}
+#main a:hover { /*Barvy odkazu pri najeti mysi*/
+    text-decoration: underline;
+    color: #5D4037;
+}
+.form.box { /*Kontaktni formular*/
+    background-color: white;
+    width: 60%;
+    margin: 30px 0 0 0;
+    padding: 0 10px 10px 10px;
+    border: solid;
+    border-color: rgb(238, 238, 238);
+    float: left;
+}
+.form.box p { /*Odsazeni odstavce*/
+    margin-bottom: 20px;
+}
+.form.box input[type=text], input[type=email] { /*Vzhled inputu*/
+    color: gray;
+    padding-left: 5px;
+    border: solid;
+    border-width: 1px;
+    border-color: silver;
+    margin-bottom: 20px;
+    width: 270px;
+    height: 30px;
+}
+.form.box label {   /*Odsazeni labelu*/
+    margin-right: 155px;
+}
+.contacts.row {
+    display: inline-block;
+}
+.left {
+    float: left; 
+}
+.right {
+    float: right;
+}
+.form.box textarea {    /*Vzhled textarea*/
+    color: gray;
+    padding-left: 5px;
+    border: solid;
+    border-width: 1px;
+    border-color: silver;
+    margin-top: 20px;
+    width: 99%;
+    height: 200px;
+}
+.row.bottom-row button {    /*Vzhled tlacitka*/
+    background-color: rgb(255, 143, 0);
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+    border: none;
+    padding: 10px 22px;
+    margin-top: 20px;
+}
+.row.bottom-row button:hover {  /*Zmena tlacitka pri najeti mysi*/
+    background-color: rgb(93, 64, 55);
+}
+.info { /*contact information*/
+    float: right;
+    width: 33%;
+    display: inline-block;
+}
+.box { /*Vzhled pozadi boxu*/
+    background-color: white;
+    border: solid;
+    border-color: rgb(238, 238, 238);
+    padding: 0 10px 10px 10px;
+    margin: 30px 0 0 0;
+}
+.box p {    /*Odsazeni odstavcu v boxu*/
+    margin-bottom: 0;
+    margin-top: 0;
+}
+.sidebar-social.social i {  /*fb, g+, twitter*/
+    display: inline-block;
+    font-size: 35px;
+    margin-right: 15px;
+}
+.newsletter.box.row {
+    margin-bottom: 20px;
+}
+.newsletter.box.row p:last-child { /*Zobrazeni inputu a tlacitka tesne vedle sebe*/
+    display: flex;
+    height: 35px;
+}
+.newsletter.box.row input[type=text] {  /*Vzhled inputu*/
+    width: 80%;
+    padding-left: 5px;
+    color: gray;
+    border: solid;
+    border-width: 1px;
+    border-color: silver;
+}
+.newsletter.box.row button {    /*tlacitko*/
+    background-color: rgb(255, 143, 0);
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+    border: none;
+    width: 20%;
+}
+.newsletter.box.row button:hover {  /*tlacitko pri najeti mysi*/
+    background-color: rgb(93, 64, 55);
+}
+#footer {   /*Paticka: pozadi, barva textu*/
+    background-color: rgb(37, 37, 37);
+    color: white;
+    min-width: 960px;
+}
+#footer .main { /*Zarovnani paty*/
+    margin: 0 auto 0 auto;
+    width: 960px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+#footer .hours {    /*Otviraci doby*/
+    width: 230px;
+    margin: 0;
+}
+#footer .about {    /*Popis*/
+    width: 230px;
+    margin: 0;
+}
+#footer .menu { /*Site Menu*/
+    width: 230px;
+    margin: 0;
+}
+#footer .menu li {  /*Zobrazeni menu*/
+    display: inline-block;
+    width: 230px;
+    margin-bottom: 0;
+    display:list-item;
+    margin-left: 0;
+    list-style-position: inside;
+}
+#footer .footer-title { /*Podtrzeni nadpisu*/
+    padding: 10px 0 10px 0;
+    margin: 10px 0 10px 0;
+    border-bottom: solid;
+    border-bottom-width: 1px;
+}
+.footer-content table { /*Otviraci casy*/
+    width: 100%;
+}
+.inner {
+    width: 100%;
+}
+#footer .social i {  /*fb, g+, twitter..*/
+    display: inline-block;
+    margin: 0;
+    padding-right: 23px;
+    font-size: 35px;
+    color: gray;
+}
+#footer .social i:hover {   /*ikony pri najeti mysi*/
+    color: white;
+}
+#copyright {    /*Spodni copyright - pozadi*/
+    background-color: rgb(51, 51, 51);
+    padding: 15px 0 15px 0;
+    margin: 0;
+}
+#copyright p {
+    color: white;
+    text-align: center;
+    margin: 0 auto 0 auto;
+    width: 960px;
+}
