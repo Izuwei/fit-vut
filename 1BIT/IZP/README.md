@@ -1,4 +1,4 @@
-#Základy programování
+# Základy programování
 
 1. Projekt: Práce s textem
   Hodnocení: 4,7/5b
