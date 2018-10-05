@@ -14,7 +14,7 @@
 ## 2BIT - Druhý semestr
 
 ### INC
->Projekt: 20/20b
+>Projekt - Přístupový terminál: 20/20b
 ### IOS
 >1. Projekt - WEDI: 15/15b  
 >2. Projekt - The Senate Bus Problem: 15/15b
