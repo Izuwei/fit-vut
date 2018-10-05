@@ -11,7 +11,7 @@ def pyth(a,b):
     c = math.sqrt(a**2 + b ** 2)  
     return c  
 >
-print(pyth(3,4))  
+>print(pyth(3,4))  
 print(pyth(6,8))  
   
 Vypsalo např:  
