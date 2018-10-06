@@ -7,4 +7,4 @@
 >Hodnocení: 15/15b  
 
 ### Survival guide
->Moje poznámky k přípravě na závěrečný test, které nemusí být 100% správné a jejich použití je pouze na vlastní nebezpečí! Neobsahuje poslední probíranou látku (správa paměti).
+>Moje poznámky k přípravě na závěrečný test, které nemusí být 100% správné a jejich použití je pouze na vlastní nebezpečí! Neobsahuje poslední probíranou kapitolu (správa paměti).
