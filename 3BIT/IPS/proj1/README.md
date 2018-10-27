@@ -25,4 +25,4 @@ Minimální počet parametrů je 1, maximální není omezen.
 
 Projekt byl vypracován ve dvojici.  
 
-#### Hodnocení 10/10b
+#### Hodnocení: 10/10b
