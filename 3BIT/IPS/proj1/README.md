@@ -1,7 +1,7 @@
 # 1. Projekt - psed
 
 ### Zadání:  
-Vytvořte program založený na vláknech, který bude provádět paralelní sed. Výsledná binárka "psed" bude mít "N" vstupních parametrů:  
+Vytvořte program založený na vláknech, který bude provádět **paralelní sed**. Výsledná binárka "psed" bude mít "N" vstupních parametrů:  
 
 ```psed RE1 REPL1 [ RE2 REPL2 ] [ RE3  REPL3 ] ...```  
 
