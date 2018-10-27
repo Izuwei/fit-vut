@@ -1,5 +1,3 @@
-// xsedla1e, xsadil07
-
 #include <iostream>
 #include <stdio.h>
 #include <thread>
