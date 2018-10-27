@@ -9,7 +9,7 @@ RE: regulární výráz (uvažujeme regulární výrazy užívané v C++11)
 
 Minimální počet parametrů je 1, maximální není omezen.  
   
-### Program psed funguje následdovně:  
+### Program psed funguje následovně:  
 1) Spustí se "k" vláken, každé pro jeden regulární výraz. Vlákna čekají, až jim bude předáno řízení hlavním vláknem.  
 2) Hlavní vlákno načte řádek ze standardního vstupu.  
 3) Předá řízení pracovním vláknům, kde každé z nich provede náhradu řádku ze vstupu pomocí regulárního výrazu "REi". Výsledek bude "REPLi". Pokud na vstupu žádný řádek nebyl, jsou vlákna korektně ukončena a celý program končí.  
