@@ -42,13 +42,10 @@ void f(int thread_id, std::regex regex, char *replacement) {
 		if (quit) break;
 		std::string s = std::regex_replace(line, regex, replacement);
 		if (thread_id != 0) {
-		//	printf("before lock print_ok[%d]\n", thread_id - 1);
 			print_ok[thread_id - 1]->lock();
-		//	printf("after lock print_ok[%d]\n", thread_id - 1);
 		}
 		puts(s.c_str());
 		print_ok[thread_id]->unlock();
-		//printf("after unlock print_ok[%d]\n", thread_id);
 		line_processed[thread_id]->unlock();
 	}
 }
@@ -92,8 +89,6 @@ int main(int argc, char *argv[]) {
 		line = read_line(&res);
 
 	}
-
-	//free(line);
 
 	quit = 1;
 
