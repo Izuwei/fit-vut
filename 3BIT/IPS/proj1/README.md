@@ -19,9 +19,9 @@ Minimální počet parametrů je 1, maximální není omezen.
 
 ### Možnost použití následujících komponent z jazyka C++:  
 - Regulární výrazy z C++1 (#include \<regex\>)  
-- Vlákna a zámky z C++11 (#include <thread>, #include <mutex>)  
-- Pole proměnné velikosti z C++1 (#include <vector>) pro uchování threadů a zámků.  
-- Funkce int read_input_line(char *) a char *to_cstr(std::string a) z předpřipravené kostry.  
+- Vlákna a zámky z C++11 (#include \<thread\>, #include \<mutex\>)  
+- Pole proměnné velikosti z C++1 (#include \<vector\>) pro uchování threadů a zámků.  
+- Funkce ```int read_input_line(char *)``` a ```char *to_cstr(std::string a)``` z předpřipravené kostry.  
 
 Projekt byl vypracován ve dvojici.  
 
