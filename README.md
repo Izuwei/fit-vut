@@ -42,4 +42,4 @@
 >1. Projekt - Psed: 10/10b  
 >2. Projekt - Malloc: 10/10b  
 ### ISS - Signály a systémy
->1. Projekt - 11/12b  
+>Projekt - 11/12b  
