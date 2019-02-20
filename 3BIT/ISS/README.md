@@ -1,8 +1,8 @@
 # Projekt
 ### Zadání
-projekt.pdf  
-xsadil07.txt  
-xsadil07.wav  
+**projekt.pdf**  
+**xsadil07.txt**  
+**xsadil07.wav**  
 ### Řešení
 **xsadil07.pdf** - Dokumentace  
 **moje_reseni.m** - zdrojové kódy  
