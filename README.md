@@ -32,3 +32,14 @@
 >2. Projekt: 29/30b  
 
 ## 3BIT - Třetí semestr
+### IAL - Algoritmy
+>1. Projekt - 10/10b  
+>2. Projekt - 10/10b  
+### INP - Návrh počítačových systémů
+>1. Projekt - Řízení maticového displeje pomocí FPGA: 8/10b  
+>2. Projekt - Procesor s Harvardskou architekturou: 23/23b  
+### IPS - Programovací seminář
+>1. Projekt - Psed: 10/10b  
+>2. Projekt - Malloc: 10/10b  
+### ISS - Signály a systémy
+>1. Projekt - 11/12b  
