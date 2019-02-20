@@ -1,4 +1,4 @@
-# Projekt
+# Signály a systémy
 ### Zadání
 **projekt.pdf**  
 **xsadil07.txt**  
