@@ -2,7 +2,7 @@
 **Autor:** Jakub Sadílek  
 **Login:** xsadil07
 
-> Navržené testovací plány jsou zaměřeny na uživatelský prostor v eshopu, tedy nákupní proces a správu uživatelského účtu.
+Navržené testovací plány jsou zaměřeny na uživatelský prostor v eshopu, tedy nákupní proces a správu uživatelského účtu.
 
 #### Proces nákupu (Purchase.feature)
 V této části jsou navrhnuté scénáře od výběru produktu až po dokončení objednávky.
