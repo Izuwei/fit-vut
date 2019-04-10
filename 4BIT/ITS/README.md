@@ -13,20 +13,20 @@ Tato část obsahuje scénáře pro otestování operací se zbožím v košíku
 ### Podkategorie produktů (Subcategories.feature)
 Testujeme zobrazení podkategorie, včetně zobrazení prázdné kategorie.
 
-#### Registrace (Registration.feature)
+### Registrace (Registration.feature)
 V této části testujeme registraci anonymního uživatele.
 
-#### Změna uživatelských údajů (AccInfo.feature)
+### Změna uživatelských údajů (AccInfo.feature)
 Otestujeme změnu informací u zaregistrovaného uživatele.
 
-#### Změna hesla (ChangePwd.feature)
+### Změna hesla (ChangePwd.feature)
 Otestujeme změnu hesla u zaregistrovaného uživatele.
 
-#### Seznam přání (WishList.feature)
+### Seznam přání (WishList.feature)
 Testujeme práci se seznamem přání. Přidání, zobrazení, odebrání a návrat zpět.
 
-#### Kontaktní formulář (ContactUs.feature)
+### Kontaktní formulář (ContactUs.feature)
 Otestujeme odeslání kontaktního formuláře.
 
-#### Proces přihlášení (Login.feature)
+### Proces přihlášení (Login.feature)
 Testujeme proces přihlášení uživatele, který vlastní účet v eshopu.
