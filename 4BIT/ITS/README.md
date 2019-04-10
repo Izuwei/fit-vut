@@ -1,6 +1,6 @@
 ## 1. projekt - Testovací scénáře
 **Autor:** Jakub Sadílek  
-**Login:** xsadil07
+**Login:** xsadil07  
 
 Navržené testovací plány jsou zaměřeny na uživatelský prostor v eshopu, tedy nákupní proces a správu uživatelského účtu.
 
@@ -17,10 +17,16 @@ Testujeme zobrazení podkategorie, včetně zobrazení prázdné kategorie.
 V této části testujeme registraci anonymního uživatele.
 
 #### Změna uživatelských údajů (AccInfo.feature)
-Otestujeme změnu informací o zaregistrovaném uživateli.
+Otestujeme změnu informací u zaregistrovaného uživatele.
 
 #### Změna hesla (ChangePwd.feature)
 Otestujeme změnu hesla u zaregistrovaného uživatele.
 
 #### Seznam přání (WishList.feature)
 Testujeme práci se seznamem přání. Přidání, zobrazení, odebrání a návrat zpět.
+
+#### Kontaktní formulář (ContactUs.feature)
+Otestujeme odeslání kontaktního formuláře.
+
+#### Proces přihlášení (Login.feature)
+Testujeme proces přihlášení uživatele, který vlastní účet v eshopu.
