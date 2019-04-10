@@ -1,5 +1,5 @@
 ## 1. projekt - Testovací scénáře
-**Autor:** Jakub Sadílek
+**Autor:** Jakub Sadílek  
 **Login:** xsadil07
 
 > Navržené testovací plány jsou zaměřeny na uživatelský prostor v eshopu, tedy nákupní proces a správu uživatelského účtu.
