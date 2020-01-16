@@ -1,4 +1,4 @@
-###Databázové systémy
+### Databázové systémy
   
 **Téma:**  
 Vaším úkolem je vytvořit modul informačního systému FIT pro **evidenci výpočetní techniky**. Systém musí pro každý typ techniky , který musí být evidován (počítače, disky, monitory, ...), uchovávat informaci o tom, kdo ji má, kde sedí apod. V případě techniky spadající pod Centrum výpočetní techniky musí být informace, ve které učebně se nachází. Systém musí být schopen kromě vkládání, modifikaci a rušení informací poskytnout přehledy o tom, kdo jakou techniku má, co se nachází ve které učebně apod.  
