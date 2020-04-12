@@ -1,0 +1,34 @@
+Autor: Jakub Sadílek
+Login: xsadil07
+
+Popis:
+
+Program umí zasílat dotazy na DNS server a vypisuje přijate odpovědi v čitelné podobě na standardní výstup.
+
+Spuštění programu:
+
+./dns [-r] [-x] [-6] -s server [-p port] adresa
+
+kde:
+	-r: Požadována rekurze (RD flag = 1, jinak 0)
+	-x: Reverzní dotaz
+	-6: Dotaz typu AAAA místo výchozího A
+	-s server: IP adresa nebo doménové jméno DNS serveru, kam bude zaslán dotaz
+	-p port: Číslo portu, na který se má poslat dotaz (výchozí je 53)
+	adresa: dotazovaná adresa
+
+- Parametry v hrnatých závorkých jsou volitelné.
+- Pro překlad použijte příkaz "make".
+- Program je napsán v jazyce C++ ve standardu std14 (viz. manual.pdf).
+
+Rozšíření:
+
+Program v odpovědích rozezná záznamy typu A, AAAA, CNAME, NS, PTR, SOA, WKS, MX, TXT, SRV a ANY, přitom se umí plně vypořádat se záznamy typu A, AAAA, CNAME, PTR, NS a SOA, ikdyž v zadání je definovaný pouze CNAME (více v dokumentaci). Jiné typy odpovědí (než ty plně podporované) se mi při testování nepodařilo zachytit. Kdyby se nějaký povedlo zachytit později, jsou data ošetřeny řetězcem "Not supported type". Ostatní nepodporované existující typy jsou ošetřeny řetězcem "UNKNOWN".
+
+Odevzdané soubory:
+
+	- xsadil07.tar
+		- README
+		- Makefile
+		- manual.pdf
+		- dns.cpp
