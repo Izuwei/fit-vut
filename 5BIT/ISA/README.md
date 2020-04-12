@@ -6,7 +6,7 @@ Napište program dns, který bude umět zasílat dotazy na DNS servery a v čite
 
 Není-li v jiné části zadání specifikováno jinak, je při vytváření programu povoleno použít hlavičkové soubory pro práci se sokety a další obvyklé funkce používané v síťovém prostředí (jako je netinet/*, sys/*, arpa/* apod.), knihovnu pro práci s vlákny (pthread), signály, časem, stejně jako standardní knihovnu jazyka C (varianty ISO/ANSI i POSIX), C++ a STL. Jiné knihovny nejsou povoleny.  
 
-###### Spuštění aplikace  
+#### Spuštění aplikace  
 Použití: dns [-r] [-x] [-6] -s server [-p port] adresa  
 
 Pořadí parametrů je libovolné. Popis parametrů:  
@@ -20,13 +20,13 @@ Podporované typy dotazů
   
 Program dns se v odpovědích musí vypořádat se záznamy typu CNAME. Není požadována podpora DNSSEC.  
   
-###### Výstup aplikace  
+#### Výstup aplikace  
   
 Na standardní výstup vypište informaci o tom, zda je získaná odpověď autoritativní, zda byla zjištěna rekurzivně a zda byla odpověď zkrácena. Dále vypište všechny sekce a záznamy obdržené v odpovědi.  
 
 Pro každou sekci v odpovědi vypište její název a počet získaných záznamů. Pro každý záznam vypište jeho název, typ, třídu, TTL a data.  
   
-###### Ukázka možného výstupu:  
+#### Ukázka možného výstupu:  
   
 $ dns -r -s kazi.fit.vutbr.cz www.fit.vut.cz  
 Authoritative: No, Recursive: Yes, Truncated: No  
