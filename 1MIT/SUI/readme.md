@@ -1,1 +1,1 @@
-#### SUI - Umělá inteligence a strojové učení
+# SUI - Umělá inteligence a strojové učení
