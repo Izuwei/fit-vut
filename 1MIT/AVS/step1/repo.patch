@@ -1,0 +1,14 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 2ef0863..de61934 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -49,6 +49,9 @@ include("${AOM_ROOT}/build/cmake/sanitizers.cmake")
+ include("${AOM_ROOT}/build/cmake/util.cmake")
+ include("${AOM_ROOT}/test/test.cmake")
+ 
++set_source_files_properties(${AOM_ROOT}/av1/common/convolve.c PROPERTIES COMPILE_FLAGS "-qopt-report=4 -qopt-report-phase=vec,loop")
++set_source_files_properties(${AOM_ROOT}/aom_dsp/aom_convolve.c PROPERTIES COMPILE_FLAGS "-qopt-report=4 -qopt-report-phase=vec,loop")
++
+ list(APPEND AOM_RTCD_SOURCES
+             "${AOM_CONFIG_DIR}/config/aom_dsp_rtcd.h"
+             "${AOM_CONFIG_DIR}/config/aom_scale_rtcd.h"

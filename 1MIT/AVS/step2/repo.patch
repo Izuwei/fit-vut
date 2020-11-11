@@ -1,0 +1,34 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 2ef0863..a474513 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -49,6 +49,9 @@ include("${AOM_ROOT}/build/cmake/sanitizers.cmake")
+ include("${AOM_ROOT}/build/cmake/util.cmake")
+ include("${AOM_ROOT}/test/test.cmake")
+ 
++set_source_files_properties(${AOM_ROOT}/av1/common/convolve.c PROPERTIES COMPILE_FLAGS "-qopt-report=4 -qopt-report-phase=vec,loop -qopenmp-simd")
++set_source_files_properties(${AOM_ROOT}/aom_dsp/aom_convolve.c PROPERTIES COMPILE_FLAGS "-qopt-report=4 -qopt-report-phase=vec,loop -qopenmp-simd")
++
+ list(APPEND AOM_RTCD_SOURCES
+             "${AOM_CONFIG_DIR}/config/aom_dsp_rtcd.h"
+             "${AOM_CONFIG_DIR}/config/aom_scale_rtcd.h"
+diff --git a/aom_dsp/aom_convolve.c b/aom_dsp/aom_convolve.c
+index 7879b88..ba78773 100644
+--- a/aom_dsp/aom_convolve.c
++++ b/aom_dsp/aom_convolve.c
+@@ -38,6 +38,7 @@ static void convolve_horiz(const uint8_t *src, ptrdiff_t src_stride,
+                            const InterpKernel *x_filters, int x0_q4,
+                            int x_step_q4, int w, int h) {
+   src -= SUBPEL_TAPS / 2 - 1;
++  #pragma omp simd
+   for (int y = 0; y < h; ++y) {
+     int x_q4 = x0_q4;
+     for (int x = 0; x < w; ++x) {
+@@ -58,6 +59,7 @@ static void convolve_vert(const uint8_t *src, ptrdiff_t src_stride,
+                           int y_step_q4, int w, int h) {
+   src -= src_stride * (SUBPEL_TAPS / 2 - 1);
+ 
++  #pragma omp simd
+   for (int x = 0; x < w; ++x) {
+     int y_q4 = y0_q4;
+     for (int y = 0; y < h; ++y) {

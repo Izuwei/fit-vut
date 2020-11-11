@@ -1,0 +1,35 @@
+1)-------------------------------------------------
+Amdahlův vzorec:
+S = P / (1 + alpha * (P - 1))
+
+P = 24 (počet cpu)
+alpha = 1 - (26.555 / 80.706) = 0.67 (sekvenční část)
+
+S = 24 / (1 + 0.67 * (24 - 1)) =  1.4625
+
+Maximální zrychlení celého kodéru s optimalizací (paralelizací) nejzásadnějších konvolučních funkcí je 46.25%.
+
+2)-------------------------------------------------
+Nachází se zde sekvenční části, které nejdou paralelizovat plus režie spojená s paralelizací. Odhadem se může jednat o 10%, tedy výsledné zrychlení tipuji o 42%.
+
+3)-------------------------------------------------
+ +++ Vektorová závislost brání vektorizaci - for loop na řádku 157 (aom_convolve.c)
+
+LOOP BEGIN at /home/training/dd-20-28-155/projekt_1/aom/aom_dsp/aom_convolve.c(157,5) inlined into /home/training/dd-20-28-155/projekt_1/aom/aom_dsp/aom_convolve.c(201,3)
+   <Predicate Optimized v4>
+      remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+      remark #15346: vector dependence: assumed ANTI dependence between x_filter[k] (144:41) and dst[x] (161:7)
+LOOP END
+
+ +++ Volání funkce memcpy() nemůže být vektorizováno - for loop na řádku 125 (aom_convolve.c)
+
+LOOP BEGIN at /home/training/dd-20-28-155/projekt_1/aom/aom_dsp/aom_convolve.c(125,3)
+   remark #15527: loop was not vectorized: function call to memcpy(void *__restrict__, const void *__restrict__, size_t) cannot be vectorized   [ /home/training/dd-20-28-155/projekt_1/aom/aom_dsp/aom_convolve.c(126,5) ]
+   remark #25456: Number of Array Refs Scalar Replaced In Loop: 2
+LOOP END
+
+ +++ Volání funkce memmove() nemůže být vektorizováno - for loop na řádku 241 (convole.c)
+
+LOOP BEGIN at /home/training/dd-20-28-155/projekt_1/aom/av1/common/convolve.c(241,3)
+   remark #15527: loop was not vectorized: function call to memmove(void *, const void *, size_t) cannot be vectorized   [ /home/training/dd-20-28-155/projekt_1/aom/av1/common/convolve.c(242,5) ]
+LOOP END
