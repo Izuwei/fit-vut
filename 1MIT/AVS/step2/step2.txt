@@ -1,7 +1,0 @@
-1)-------------------------------------------------
-Ve všeobecnosti, jelikož kompilátor se pokusí vektorizovat, zvolí si vektorový operand místo skalárního pro danou smyčku - pak může vzniknout místo, kde bude existovat překrytí mezi vstupním a výstupním vektorem a budou vznikat chyby nad daty typu RAW, WAR či někdy WAW.
-
-2)-------------------------------------------------
-
-3)-------------------------------------------------
-Horizontální se povedlo urychlit 1.66x a vertikální 5.26x. Více se povedl urychlit vertikální směr, protože 
