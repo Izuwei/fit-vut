@@ -26,6 +26,10 @@ const printHelp = () => {
     console.log("+ sim <value>\n");
 }
 
+const errorMsg = () => {
+    console.log("Unknown operation or bad parameter! For help type 'help'.");
+}
+
 /**
  * Function choose a random operation for simulation.
  * 
@@ -38,18 +42,20 @@ const randomOperation = () => {
 }
 
 /**
- * Function generate a random value as positive integer from 0 up to 99.
+ * Function generate a random value as positive integer from 1 up to 99.
  * 
  * @returns Random value as integer.
  */
 const randomNumber = () => {
-    return Math.floor(Math.random() * Math.floor(100));
+    return Math.floor(Math.random() * Math.floor(99)) + 1;
 }
 
 const doSimulation = (iterations) => {
     console.log("----------------------");
     console.log("Begin of simulation...");
     console.log("----------------------");
+
+    calculator.execute(new ResetCommand());
     console.log("Initial value: " + calculator.getValue());
     
     for (let i = 0; i < iterations; i++) {
@@ -58,6 +64,11 @@ const doSimulation = (iterations) => {
 
         processOperation(operation, value);
     }
+
+    console.log("----------------------");
+
+    calculator.execute(new ResetCommand());
+    console.log("\nInitial value: " + calculator.getValue() + "\n");
 }
 
 const readOperation = async () => {
@@ -80,11 +91,13 @@ const encodeOperation = (line) => {
     if (OPERATIONS_WITH_VAL.includes(operation[0])) {
         let regex = new RegExp('^-?\\d+\\.?\\d*$');
 
-        if (operation.length > 2) {
-            return 1;
-        }
-        if (regex.test(operation[1])) {
+        if (regex.test(operation[1]) && operation.length === 2) {
             operation[1] = parseFloat(operation[1]);
+
+            if (operation[0] === "div" && operation[1] === 0) {
+                return 1;
+            }
+
             return operation;
         }
         else {
@@ -144,7 +157,7 @@ const processOperation = (operation, value) => {
             printHelp();
             break;
         default:
-            console.log("Unknown operation or bad parameter! For help type 'help'.");
+            errorMsg();
             break;
     }
 }
@@ -152,12 +165,17 @@ const processOperation = (operation, value) => {
 const main = async () => {
     printHelp();
 
-    console.log("Initial value: " + calculator.getValue());
+    console.log("Initial value: " + calculator.getValue() + "\n");
     while (1) {
         let line = await readOperation();
         line = encodeOperation(line);
 
+        if (line === 1) {
+            errorMsg();
+            continue;
+        }
         if (line[0] === "quit") {
+            console.log("Good bye.")
             break;
         }
 
