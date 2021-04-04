@@ -10,12 +10,11 @@ type Term = String
 type Rule = (Nonterm, [String])
 
 -- G = { N, T, R, S }
-data Grammar = Grammar { nonterms :: [Nonterm]  -- N
-                       , terms :: [Term]        -- T
-                       , rules :: [Rule]        -- P
-                       , initNonterm :: Nonterm        -- S
+data Grammar = Grammar { nonterms :: [Nonterm]   -- N
+                       , terms :: [Term]         -- T
+                       , rules :: [Rule]         -- P
+                       , initNonterm :: Nonterm  -- S
                        } deriving (Show, Eq)
-
 
 type State = Integer
 type Symbol = String
@@ -34,6 +33,7 @@ data FSM = FSM { states :: [State]              -- Q
                , finalStates :: [State]         -- F
                } deriving (Show, Eq)
 
+
 -- Function returns pair (index, filename) according to program parameters.
 parseArgs :: Num a => [[Char]] -> (a, [Char])
 parseArgs args =
@@ -46,23 +46,26 @@ parseArgs args =
         ["-2", file] -> (2, file)
         _ -> error "Unexpected program parameters."
 
+-- Function loads content according to the format of file parameter.
 loadInput :: [Char] -> IO String
 loadInput file
-    | null file = getContents
-    | otherwise = readFile file
+    | null file = getContents       -- No file, so get it from user
+    | otherwise = readFile file     -- Load from file
 
+-- Function splits string by given separator, then returns list of strings.
 split :: Char -> [Char] -> [[Char]]
 split sep str =
     case break (==sep) str of
         (a, sep:b) -> a : split sep b
         (a, "") -> [a]
 
+-- Function gets a list of strings (from file) and convert it into a grammar.
 loadGrammar :: [[Char]] -> Grammar
 loadGrammar (nonterms : terms : initNonterm : rules) =
-    Grammar (checkNonterms (getSymbols nonterms))
-            (checkTerms (getSymbols terms))
-            (checkRules (getRules rules))
-            (checkNonterm initNonterm)        -- Udělat kontroly na všechno
+    Grammar (checkNonterms (getSymbols nonterms))   -- Nonterms
+            (checkTerms (getSymbols terms))         -- Terms
+            (checkRules (getRules rules))           -- Rules
+            (checkNonterm initNonterm)              -- initial nonterm
     where
         getSymbols line = split ',' line
 
@@ -201,7 +204,7 @@ loadFSM grammar =
 showFSM :: FSM -> IO ()
 showFSM fsm = do
     putStrLn (intercalate "," [show state | state <- states fsm])
-    putStrLn (intercalate "," (alphabet fsm))
+    putStrLn (concat (alphabet fsm))
     print (initState fsm)
     putStrLn (intercalate "," [show state | state <- finalStates fsm])
     mapM_ putStrLn $ sort [intercalate "," [show (state t), symbol t, show (nextState t)] | t <- transitions fsm]
