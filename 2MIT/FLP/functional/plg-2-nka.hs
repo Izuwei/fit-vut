@@ -117,29 +117,69 @@ showGrammar grammar = do
     mapM_ (\rule -> putStrLn (fst rule ++ "->" ++ concat (snd rule))) (rules grammar)
 
 nontermGenerator n nonterm nonterms
-    | (nonterm ++ show n) `elem` nonterms = nontermGenerator (n+1) nonterm nonterms
-    | otherwise = nonterm ++ show n
+    | (head nonterm : show n) `elem` nonterms = nontermGenerator (n+1) nonterm nonterms
+    | otherwise = head nonterm : show n
+
+getNonterms terms rules = sort $ removeDuplicities $ getNontermList terms rules
+    where
+        getNontermList terms [] = []
+        getNontermList terms (r:rs) = [fst r] ++ filter (`notElem` (terms ++ ["#"])) (snd r) ++ getNontermList terms rs
+        removeDuplicities [] = []
+        removeDuplicities (x:xs)
+            | x `elem` xs = removeDuplicities xs
+            | otherwise = x : removeDuplicities xs
 
 transformGrammar grammar =
     Grammar (nonterms grammar)
-            (terms grammar)
-            (transformRules (nonterms grammar) (rules grammar))
+            (getNonterms (terms grammar) transformedRules)
+            transformedRules
             (initNonterm grammar)
     where
-        cascadeRule nonterms (l, r) = 
-            (newNonterms, [(l, [head r, newNonterm])] ++ newRules)
+        transformedRules = transformRules (nonterms grammar) (rules grammar)
+
+        cascadeRule nonterms (l, r) =
+            (newNonterms, (l, [head r, newNonterm]) : newRules)
             where
                 newNonterm = nontermGenerator 1 l nonterms
                 (newNonterms, newRules) = transformRule (nonterms ++ [newNonterm]) (newNonterm, tail r)
-                
+
+        transformTerminalRule nonterms (l, r) =
+            (nonterms ++ [newNonterm], [(l, [head r, newNonterm]), (newNonterm, ["#"])])
+            where
+                newNonterm = nontermGenerator 1 l nonterms
+
         transformRule nonterms rule@(l, r)
             | length r == 1 && last r == "#" = (nonterms, [rule])
+            | length r == 1 = transformTerminalRule nonterms rule -- For not eps rules use this: (nonterms, [rule])
             | length r == 2 && last r `elem` nonterms = (nonterms, [rule])
-            | length r > 2 && last r `elem` nonterms = cascadeRule nonterms rule
-                
+            | otherwise = cascadeRule nonterms rule
+            -- comment: | length r > 2 && last r `elem` nonterms = cascadeRule nonterms rule
+
+        transformRules nonterms [rule] = snd $ transformRule nonterms rule
         transformRules nonterms (rule:rules) =  newRules ++ transformRules newNonterms rules
             where
                 (newNonterms, newRules) = transformRule nonterms rule
+
+
+loadFSM grammar =
+    FSM ([i | (_, i) <- stateConv])
+        (nonterms grammar)
+        (getTransitions)
+        (initNonterm grammar)
+        getFinalStates (rules grammar)
+    where
+        stateConv = nontermsToStates (nonterms grammar)
+
+        nontermsToStates = numberStates 1
+            where
+                numberStates _ [] = []
+                numberStates n (x:xs) = (x, n) : numberStates (n+1) xs
+
+        getTransition rule = Transition ()
+        getTransitions (rule:rules)
+            | length rule == 1 = getTransition rule
+        
+        getFinalStates rules = filter (\rule -> snd rule == "#") rules
 
 main :: IO ()
 main = do
@@ -154,7 +194,8 @@ main = do
         0 -> showGrammar grammar
         1 -> showGrammar $ transformGrammar grammar
 
-    -- putStr (show grammar)
-    return ()
+    putStr (show $ transformGrammar grammar)
+
+
 
 
