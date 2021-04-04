@@ -34,6 +34,7 @@ data FSM = FSM { states :: [State]              -- Q
                , finalStates :: [State]         -- F
                } deriving (Show, Eq)
 
+-- Function returns pair (index, filename) according to program parameters.
 parseArgs :: Num a => [[Char]] -> (a, [Char])
 parseArgs args =
     case args of
@@ -108,6 +109,9 @@ loadGrammar (nonterms : terms : initNonterm : rules) =
 
                     else
                         error (concat nut ++ " is unsupported right side of the rule.")
+
+loadGrammar _ = error "Insufficient input."
+
 
 showGrammar :: Grammar -> IO ()
 showGrammar grammar = do
