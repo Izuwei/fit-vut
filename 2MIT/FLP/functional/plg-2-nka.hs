@@ -1,7 +1,6 @@
 import System.Environment
 import System.IO
 import Data.List
-import Data.Bifunctor
 
 type Nonterm = String
 type Term = String
@@ -93,7 +92,7 @@ loadGrammar (nonterms : terms : initNonterm : rules) =
                     | symbol `elem` ['a' .. 'z'] = symbol
                     | otherwise = error ("Terminal '" ++ [symbol] ++ "' must be in range a-z.")
 
-        checkRules rls = [Data.Bifunctor.bimap checkNonterm checkRight rule | rule <- rls]
+        checkRules rls = [(checkNonterm (fst rule), checkRight (snd rule)) | rule <- rls]
             where
                 isAllTerm [] = True
                 isAllTerm [t] = True
