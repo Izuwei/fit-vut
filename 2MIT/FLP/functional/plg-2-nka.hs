@@ -45,7 +45,6 @@ parseArgs args =
         ["-2", file] -> (2, file)
         _ -> error "Unexpected program parameters."
 
-
 loadInput :: [Char] -> IO String
 loadInput file
     | null file = getContents
@@ -110,16 +109,19 @@ loadGrammar (nonterms : terms : initNonterm : rules) =
                     else
                         error (concat nut ++ " is unsupported right side of the rule.")
 
+showGrammar :: Grammar -> IO ()
 showGrammar grammar = do
     putStrLn (intercalate "," (nonterms grammar))
     putStrLn (intercalate "," (terms grammar))
     putStrLn (initNonterm grammar)
     mapM_ (\rule -> putStrLn (fst rule ++ "->" ++ concat (snd rule))) (rules grammar)
 
+nontermGenerator :: (Foldable t, Show a, Num a) => a -> [Char] -> t [Char] -> [Char]
 nontermGenerator n nonterm nonterms
     | (head nonterm : show n) `elem` nonterms = nontermGenerator (n+1) nonterm nonterms
     | otherwise = head nonterm : show n
 
+getNonterms :: [[Char]] -> [([Char], [[Char]])] -> [[Char]]
 getNonterms terms rules = sort $ removeDuplicities $ getNontermList terms rules
     where
         getNontermList terms [] = []
@@ -129,9 +131,10 @@ getNonterms terms rules = sort $ removeDuplicities $ getNontermList terms rules
             | x `elem` xs = removeDuplicities xs
             | otherwise = x : removeDuplicities xs
 
+transformGrammar :: Grammar -> Grammar
 transformGrammar grammar =
-    Grammar (nonterms grammar)
-            (getNonterms (terms grammar) transformedRules)
+    Grammar (getNonterms (terms grammar) transformedRules)
+            (terms grammar)
             transformedRules
             (initNonterm grammar)
     where
@@ -160,26 +163,44 @@ transformGrammar grammar =
             where
                 (newNonterms, newRules) = transformRule nonterms rule
 
-
+loadFSM :: Grammar -> FSM
 loadFSM grammar =
-    FSM ([i | (_, i) <- stateConv])
-        (nonterms grammar)
-        (getTransitions)
-        (initNonterm grammar)
-        getFinalStates (rules grammar)
+    FSM ([i | (_, i) <- convTable])
+        (terms grammar)
+        (getTransitions (rules grammar))
+        (getState (initNonterm grammar) convTable)
+        (getFinalStates (rules grammar))
     where
-        stateConv = nontermsToStates (nonterms grammar)
+        convTable = nontermsToStates (nonterms grammar)
 
         nontermsToStates = numberStates 1
             where
                 numberStates _ [] = []
                 numberStates n (x:xs) = (x, n) : numberStates (n+1) xs
 
-        getTransition rule = Transition ()
+        getState nonterm [] = error ("Unknown Nonterm: " ++ nonterm)
+        getState nonterm ((n, i):xs)
+            | nonterm == n = i
+            | otherwise = getState nonterm xs
+
+        getTransition (l, r) = Transition (getState l convTable)
+                                          (head r)
+                                          (getState (last r) convTable)
+
+        getTransitions [] = []
         getTransitions (rule:rules)
-            | length rule == 1 = getTransition rule
-        
-        getFinalStates rules = filter (\rule -> snd rule == "#") rules
+            | length (snd rule) == 1 = getTransitions rules
+            | otherwise = getTransition rule : getTransitions rules
+
+        getFinalStates rules = map (\(a, _) -> getState a convTable) (filter (\(_, y) -> last y == "#") rules)
+
+showFSM :: FSM -> IO ()
+showFSM fsm = do
+    putStrLn (intercalate "," [show state | state <- states fsm])
+    putStrLn (intercalate "," (alphabet fsm))
+    print (initState fsm)
+    putStrLn (intercalate "," [show state | state <- finalStates fsm])
+    mapM_ putStrLn $ sort [intercalate "," [show (state t), symbol t, show (nextState t)] | t <- transitions fsm]
 
 main :: IO ()
 main = do
@@ -193,9 +214,9 @@ main = do
     case option of
         0 -> showGrammar grammar
         1 -> showGrammar $ transformGrammar grammar
+        2 -> showFSM $ loadFSM $ transformGrammar grammar
 
-    putStr (show $ transformGrammar grammar)
-
-
-
-
+    -- putStr (show $ transformGrammar grammar)
+    -- showFSM fsm
+    -- putStr (show $ nontermsToStates )
+    -- putStr (show $ loadFSM (Grammar {nonterms = ["A","B"], terms = ["A","A1","A2","B"], rules = [("A",["a","A1"]),("A1",["a","B"]),("A",["c","A2"]),("A2",["c","B"]),("B",["b","B"]),("B",["#"])], initNonterm = "A"}))
