@@ -193,10 +193,6 @@ void procTask(int cycle, int id) {
         storeNumber(number);            // Store number to queue.
     }
 
-    //if (id == 2) {
-    //    std::cout << "ID: " << id << " CYCLE: " << cycle << std::endl;
-    //}
-
     // Processor starts working.
     if (cycle >= startSend && cycle <= endSend) {
         number = loadNumber(id);        // Load number to send.
