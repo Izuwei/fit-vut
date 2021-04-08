@@ -96,8 +96,12 @@ void procConfig(int id) {
  * @param queue Queue to print.
 */
 void printQueue(std::queue<unsigned> queue) {
+    if (!queue.empty()) {
+        std::cout << queue.front();
+        queue.pop();
+    }
     while (!queue.empty()) {
-        std::cout << queue.front() << " ";
+        std::cout << " " << queue.front();
         queue.pop();
     }
     std::cout << std::endl;
