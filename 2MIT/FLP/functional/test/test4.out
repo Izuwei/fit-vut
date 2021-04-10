@@ -1,0 +1,15 @@
+A,A1,A2,A3,A4,A5,A6,A7,A8,B,B1,B2
+a,b,c
+A
+A->aA1
+A1->bA2
+A2->cA3
+A3->aA4
+A4->bA5
+A5->cA6
+A6->aA7
+A7->bA8
+A8->cB
+B->bB1
+B1->bB2
+B2->#

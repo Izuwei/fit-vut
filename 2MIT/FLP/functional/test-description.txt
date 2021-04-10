@@ -1,0 +1,44 @@
+--------- Test 1 ---------
+spuštění: ./plg-2-nka -i ./test/test1.in
+
+Základní test přiložený k zadání projektu. Testuje výpis načtené gramatiky po přepínači -i.
+
+--------- Test 2 ---------
+spuštění: ./plg-2-nka -1 ./test/test2.in
+
+Stejný vstup jako Test1. Testuje transformaci PLG podle věty 3.2. TIN opory (přepínač -1).
+
+--------- Test 3 ---------
+spuštění: ./plg-2-nka -2 ./test/test3.in
+
+Opět stejný vstup jako Test1. Testuje převod na konečný automat (přepínač -2).
+
+--------- Test 4 ---------
+spuštění: ./plg-2-nka -1 ./test/test4.in
+
+Test převodu velmi dlouhého pravidla na sekvenci krátkých pravidel.
+
+--------- Test 5 ---------
+spuštění: ./plg-2-nka -2 ./test/test5.in
+
+Test převodu na automat bez ukončujícího stavu.
+
+--------- Test 6 ---------
+spuštění: ./plg-2-nka -2 ./test/test6.in
+
+Test převodu na automat s více ukončujícími stavy.
+
+--------- Test 7 ---------
+spuštění: ./plg-2-nka -1 ./test/test7.in
+
+Test převodu na gramatiku s prázdnou množinou pravidel.
+
+--------- Test 8 ---------
+spuštění: ./plg-2-nka -2 ./test/test8.in
+
+Test převodu na automat s prázdnou množinou přechodů (obshuje pouze stavy a abecedu).
+
+--------- Test 9 ---------
+spuštění: ./plg-2-nka -2 ./test/test9.in
+
+Převod na automat s nedosažitelnými stavy.

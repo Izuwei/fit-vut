@@ -150,7 +150,7 @@ showGrammar grammar = do
     mapM_ (\rule -> putStrLn (fst rule ++ "->" ++ concat (snd rule))) (rules grammar)
 
 -- Funkce dostane pocatecni cislo, neterminal a list neterminalu.
--- Pote vrati novy neterminal, ktery neni obsazen v zadanem list neterminalu.
+-- Pote vrati novy neterminal, ktery neni obsazen v zadanem listu neterminalu.
 nontermGenerator :: Integer -> [Char] -> [[Char]] -> [Char]
 nontermGenerator n nonterm nonterms
     | (head nonterm : show n) `elem` nonterms = nontermGenerator (n+1) nonterm nonterms
