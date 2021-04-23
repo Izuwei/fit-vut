@@ -387,6 +387,186 @@ rotate_cube(
     ]
 ).
 
+% Rotace kostky: vertikalne leva rada nahoru pri pohledu z bocni prave strany.
+rotate_cube(
+    [
+        C51,C52,C53,
+        C54,C55,C56,
+        C57,C58,C59,
+
+        C11,C12,C13,    C21,C22,C23,    C31,C32,C33,    C41,C42,C43,
+        C14,C15,C16,    C24,C25,C26,    C34,C35,C36,    C44,C45,C46,
+        C17,C18,C19,    C27,C28,C29,    C37,C38,C39,    C47,C48,C49,
+
+        C61,C62,C63,
+        C64,C65,C66,
+        C67,C68,C69
+    ],
+    [
+        C51,C52,C53,
+        C54,C55,C56,
+        C21,C24,C27,
+
+        C13,C16,C19,    C63,C22,C23,    C31,C32,C33,    C41,C42,C59,
+        C12,C15,C18,    C62,C25,C26,    C34,C35,C36,    C44,C45,C58,
+        C11,C14,C17,    C61,C28,C29,    C37,C38,C39,    C47,C48,C57,
+
+        C43,C46,C49,
+        C64,C65,C66,
+        C67,C68,C69
+    ]
+).
+
+% Rotace kostky: vertikalne leva rada dolu pri pohledu z bocni prave strany.
+rotate_cube(
+    [
+        C51,C52,C53,
+        C54,C55,C56,
+        C57,C58,C59,
+
+        C11,C12,C13,    C21,C22,C23,    C31,C32,C33,    C41,C42,C43,
+        C14,C15,C16,    C24,C25,C26,    C34,C35,C36,    C44,C45,C46,
+        C17,C18,C19,    C27,C28,C29,    C37,C38,C39,    C47,C48,C49,
+
+        C61,C62,C63,
+        C64,C65,C66,
+        C67,C68,C69
+    ],
+    [
+        C51,C52,C53,
+        C54,C55,C56,
+        C49,C46,C43,
+
+        C17,C14,C11,    C57,C22,C23,    C31,C32,C33,    C41,C42,C61,
+        C18,C15,C12,    C58,C25,C26,    C34,C35,C36,    C44,C45,C62,
+        C19,C16,C13,    C59,C28,C29,    C37,C38,C39,    C47,C48,C63,
+
+        C27,C24,C21,
+        C64,C65,C66,
+        C67,C68,C69
+    ]
+).
+
+% Rotace kostky: vertikalne prostredni rada nahoru pri pohledu z bocni prave strany.
+rotate_cube(
+    [
+        C51,C52,C53,
+        C54,C55,C56,
+        C57,C58,C59,
+
+        C11,C12,C13,    C21,C22,C23,    C31,C32,C33,    C41,C42,C43,
+        C14,C15,C16,    C24,C25,C26,    C34,C35,C36,    C44,C45,C46,
+        C17,C18,C19,    C27,C28,C29,    C37,C38,C39,    C47,C48,C49,
+
+        C61,C62,C63,
+        C64,C65,C66,
+        C67,C68,C69
+    ],
+    [
+        C51,C52,C53,
+        C22,C25,C28,
+        C57,C58,C59,
+
+        C11,C12,C13,    C21,C66,C23,    C31,C32,C33,    C41,C56,C43,
+        C14,C15,C16,    C24,C65,C26,    C34,C35,C36,    C44,C55,C46,
+        C17,C18,C19,    C27,C64,C29,    C37,C38,C39,    C47,C54,C49,
+
+        C61,C62,C63,
+        C42,C45,C48,
+        C67,C68,C69
+    ]
+).
+
+% Rotace kostky: vertikalne prostredni rada dolu pri pohledu z bocni prave strany.
+rotate_cube(
+    [
+        C51,C52,C53,
+        C54,C55,C56,
+        C57,C58,C59,
+
+        C11,C12,C13,    C21,C22,C23,    C31,C32,C33,    C41,C42,C43,
+        C14,C15,C16,    C24,C25,C26,    C34,C35,C36,    C44,C45,C46,
+        C17,C18,C19,    C27,C28,C29,    C37,C38,C39,    C47,C48,C49,
+
+        C61,C62,C63,
+        C64,C65,C66,
+        C67,C68,C69
+    ],
+    [
+        C51,C52,C53,
+        C48,C45,C42,
+        C57,C58,C59,
+
+        C11,C12,C13,    C21,C54,C23,    C31,C32,C33,    C41,C64,C43,
+        C14,C15,C16,    C24,C55,C26,    C34,C35,C36,    C44,C65,C46,
+        C17,C18,C19,    C27,C56,C29,    C37,C38,C39,    C47,C66,C49,
+
+        C61,C62,C63,
+        C28,C25,C22,
+        C67,C68,C69
+    ]
+).
+
+% Rotace kostky: vertikalne prava rada nahoru pri pohledu z bocni prave strany.
+rotate_cube(
+    [
+        C51,C52,C53,
+        C54,C55,C56,
+        C57,C58,C59,
+
+        C11,C12,C13,    C21,C22,C23,    C31,C32,C33,    C41,C42,C43,
+        C14,C15,C16,    C24,C25,C26,    C34,C35,C36,    C44,C45,C46,
+        C17,C18,C19,    C27,C28,C29,    C37,C38,C39,    C47,C48,C49,
+
+        C61,C62,C63,
+        C64,C65,C66,
+        C67,C68,C69
+    ],
+    [
+        C23,C26,C29,
+        C54,C55,C56,
+        C57,C58,C59,
+
+        C11,C12,C13,    C21,C22,C69,    C37,C34,C31,    C53,C42,C43,
+        C14,C15,C16,    C24,C25,C68,    C38,C35,C32,    C52,C45,C46,
+        C17,C18,C19,    C27,C28,C67,    C39,C36,C33,    C51,C48,C49,
+
+        C61,C62,C63,
+        C64,C65,C66,
+        C41,C44,C47
+    ]
+).
+
+% Rotace kostky: vertikalne prava rada dolu pri pohledu z bocni prave strany.
+rotate_cube(
+    [
+        C51,C52,C53,
+        C54,C55,C56,
+        C57,C58,C59,
+
+        C11,C12,C13,    C21,C22,C23,    C31,C32,C33,    C41,C42,C43,
+        C14,C15,C16,    C24,C25,C26,    C34,C35,C36,    C44,C45,C46,
+        C17,C18,C19,    C27,C28,C29,    C37,C38,C39,    C47,C48,C49,
+
+        C61,C62,C63,
+        C64,C65,C66,
+        C67,C68,C69
+    ],
+    [
+        C47,C44,C41,
+        C54,C55,C56,
+        C57,C58,C59,
+
+        C11,C12,C13,    C21,C22,C51,    C33,C36,C39,    C67,C42,C43,
+        C14,C15,C16,    C24,C25,C52,    C32,C35,C38,    C68,C45,C46,
+        C17,C18,C19,    C27,C28,C53,    C31,C34,C37,    C69,C48,C49,
+
+        C61,C62,C63,
+        C64,C65,C66,
+        C29,C26,C23
+    ]
+).
+
 % Vyresena kostka -> strany obsahuji stejne znaky.
 is_solved(
     [
@@ -404,8 +584,9 @@ is_solved(
     ]
 ).
 
+
 /** 
- * Nasledujici cast kodu je prevzata z prilozene ukazky input2.pl .
+ * Nasledujici cast kodu je prevzata z prilozene ukazky input2.pl.
 */
 % Cte radky ze standardniho vstupu, konci na LF nebo EOF.
 read_line(L,C) :-
