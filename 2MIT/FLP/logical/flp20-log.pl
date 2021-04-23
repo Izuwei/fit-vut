@@ -467,7 +467,8 @@ solve_cube(Cube, SolvedCube, [NewCube | Cubes]) :- solve_cube(NewCube, SolvedCub
 
 % Program zacne zde.
 start :-
-	read_lines(Lines),
+    prompt(_, ''),
+    read_lines(Lines),
     split_lines(Lines, SplitedLines),
     flatten(SplitedLines, Cube),    % Zjednodusi list
 
