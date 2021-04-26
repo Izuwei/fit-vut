@@ -10,4 +10,4 @@ cpus=$((mat1*mat2))
 
 mpic++ --prefix /usr/local/share/OpenMPI -o mm mm.cpp -std=c++0x
 mpirun --oversubscribe --prefix /usr/local/share/OpenMPI -np $cpus mm
-#rm -f mm
+rm -f mm
