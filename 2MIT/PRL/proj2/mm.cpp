@@ -107,7 +107,7 @@ Matrix loadMatrix(std::string filename, int ord) {
         std::stringstream lineStream(line);
 
         // Inspired: https://stackoverflow.com/questions/20659066/parse-string-to-vector-of-int
-        while (lineStream >> number)        // Store each number as int to vector
+        while (lineStream >> number)        // Store each number as int to the vector
             matrix.data.push_back(number);
 
         matrix.height++;                    // Increase row countner
@@ -195,7 +195,7 @@ void firstProcPreparation(int procCount) {
 }
 
 /**
- * Preparation process of all processors except 1st before starting calculation.
+ * Preparation process of all processors except the 1st one before starting calculation.
 */
 void procPreparation() {
     // Receive and store matrix informations from the 1st processor.
@@ -204,7 +204,7 @@ void procPreparation() {
     MPI_Recv(&procConfig.M1_width, 1, MPI_UNSIGNED, 0, TAG_M1_WIDTH, MPI_COMM_WORLD, &status);
     MPI_Recv(&procConfig.M2_width, 1, MPI_UNSIGNED, 0, TAG_M2_WIDTH, MPI_COMM_WORLD, &status);
 
-    setCoordinates(procConfig.M2_width);    // Set position of processor in matrix
+    setCoordinates(procConfig.M2_width);    // Set position of processor in the matrix
 
     int number;
     
@@ -228,7 +228,7 @@ void procPreparation() {
 void meshMult() {
     int horizCell, vertCell;
 
-    for (int i = 0; i < procConfig.M1_width; i++) {     // Or M2_height - its same, both matrix must have atleast one side same
+    for (int i = 0; i < procConfig.M1_width; i++) {     // Or M2_height - its same, both matrix must have same atleast one side
         if (procConfig.i == 0) {                        // Vertical initial processor - get value from queue
             vertCell = vertQueue.front();
             vertQueue.pop();
@@ -237,11 +237,11 @@ void meshMult() {
             MPI_Recv(&vertCell, 1, MPI_INT, getProcID(procConfig.i-1, procConfig.j), TAG_VERT_CELL, MPI_COMM_WORLD, &status);
         }
 
-        if (procConfig.j == 0) {    // Horizontal initial processor - get value from queue
+        if (procConfig.j == 0) {                        // Horizontal initial processor - get value from queue
             horizCell = horizQueue.front();
             horizQueue.pop();
         }
-        else {                      // Horizontal non initial processor - get value from previous processor
+        else {                                          // Horizontal non initial processor - get value from previous processor
             MPI_Recv(&horizCell, 1, MPI_INT, getProcID(procConfig.i, procConfig.j-1), TAG_HORIZ_CELL, MPI_COMM_WORLD, &status);
         }
 
@@ -264,7 +264,7 @@ void sendResults() {
 }
 
 /**
- * 1st processor receives cell values from all other processors and stores them into matrix class.
+ * 1st processor receives cell values from all other processors and stores them into the matrix class.
  * 
  * @param procCount Number of processors.
  * @returns Class of final matrix.
@@ -273,9 +273,9 @@ Matrix receiveResults(int procCount) {
     Matrix matrix;
     int cell;
 
-    matrix.data.push_back(procConfig.cellValue);    // Store value from 1st processor
+    matrix.data.push_back(procConfig.cellValue);    // Store value from the 1st processor
 
-    for (int i = 1; i < procCount; i++) {           // Receive and store value from each other processor
+    for (int i = 1; i < procCount; i++) {           // Receive and store value from other processors
         MPI_Recv(&cell, 1, MPI_INT, i, TAG_RES, MPI_COMM_WORLD, &status);
         matrix.data.push_back(cell);
     }
@@ -324,8 +324,8 @@ int main(int argc, char **argv) {
     meshMult();     // Mesh multiplication algorithm calculation
 
     if (procID == 0) {
-        Matrix m = receiveResults(procCount);   // 1st proc. gets results from other processors
-        printMatrix(m);                         // 1st proc. prints results
+        Matrix m = receiveResults(procCount);   // 1st processor gets results from other processors
+        printMatrix(m);                         // 1st processor prints results
     }
     else {
         sendResults();                          // Other processors sends results
