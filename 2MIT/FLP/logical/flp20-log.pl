@@ -620,6 +620,10 @@ split_lines([L|Ls],[H|T]) :- split_lines(Ls,T), split_line(L,H).
 */
 
 
+% Rekurzivne aplikuje vsechny mozne rotace kostky az najde slozenou kostku.
+solve_cube(Cube, Cube, []) :- is_solved(Cube).
+solve_cube(Cube, SolvedCube, [NewCube | Cubes]) :- solve_cube(NewCube, SolvedCube, Cubes), rotate_cube(Cube, NewCube).
+
 % Vypise N prvku z listu.
 show_n(_, [], []).
 show_n(0, Rest, Rest).
@@ -640,10 +644,6 @@ show_cube(Cube) :-
 % Vypise vsechny kostky ze seznamu.
 show_cubes([]).
 show_cubes([Cube | Cubes]) :- nl, show_cube(Cube), show_cubes(Cubes).
-
-% Rekurzivne aplikuje vsechny mozne rotace kostky az najde slozenou kostku.
-solve_cube(Cube, Cube, []) :- is_solved(Cube).
-solve_cube(Cube, SolvedCube, [NewCube | Cubes]) :- solve_cube(NewCube, SolvedCube, Cubes), rotate_cube(Cube, NewCube).
 
 
 % Program zacne zde.
