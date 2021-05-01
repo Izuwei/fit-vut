@@ -71,9 +71,9 @@ std::queue<int> vertQueue;      // Queue for top processors
 std::queue<int> horizQueue;     // Queue for left processors
 
 /**
- * Function prints message on stderr and terminates program.
+ * Function prints message to stderr and terminates program on error.
  * 
- * @param message Message for print to stderr.
+ * @param message Message to print.
 */
 void error(const char *message) {
     fprintf(stderr, "%s\n", message);
@@ -103,14 +103,14 @@ Matrix loadMatrix(std::string filename, int ord) {
     unsigned n = std::stoi(line);
 
     int number;
-    while (std::getline(file, line)) {      // Each row of matrix
+    while (std::getline(file, line)) {      // For each row of matrix
         std::stringstream lineStream(line);
 
         // Inspired: https://stackoverflow.com/questions/20659066/parse-string-to-vector-of-int
         while (lineStream >> number)        // Store each number as int to the vector
             matrix.data.push_back(number);
 
-        matrix.height++;                    // Increase row countner
+        matrix.height++;                    // Increase row counter
     }
 
     file.close();
@@ -128,16 +128,6 @@ Matrix loadMatrix(std::string filename, int ord) {
 }
 
 /**
- * Function calculates processor ID according to its coordinates.
- * 
- * @param i Row index of processor.
- * @param j Column index of processor.
-*/
-int getProcID(unsigned i, unsigned j) {
-    return i * procConfig.M2_width + j;
-}
-
-/**
  * Funcion sets position of the processor in the final matrix according to its ID.
  * 
  * @param width Width of the final matrix.
@@ -148,6 +138,16 @@ void setCoordinates(unsigned width) {
 }
 
 /**
+ * Function calculates processors ID according to its coordinates.
+ * 
+ * @param i Row index of processor.
+ * @param j Column index of processor.
+*/
+int getProcID(unsigned i, unsigned j) {
+    return i * procConfig.M2_width + j;
+}
+
+/**
  * Preparation process of the 1st processor before starting calculation.
  * 
  * @param procCount Number of processors.
@@ -155,9 +155,12 @@ void setCoordinates(unsigned width) {
 void firstProcPreparation(int procCount) {
     Matrix matrix_1 = loadMatrix(MATRIX1_FILENAME, 1);
     Matrix matrix_2 = loadMatrix(MATRIX2_FILENAME, 2);
-
+    
     if (procCount != (matrix_1.height * matrix_2.width))    // Check correct number of processors
         error("Bad number of processors to start the algorithm calculation.");
+
+    if (matrix_1.width != matrix_2.height)
+        error("Cannot multiply these matrices.");
 
     for (int i = 1; i < procCount; i++) {           // Send matrix infos to other processors
         MPI_Send(&matrix_1.height, 1, MPI_UNSIGNED, i, TAG_M1_HEIGHT, MPI_COMM_WORLD);
@@ -191,7 +194,6 @@ void firstProcPreparation(int procCount) {
     for (int i = 0; i < matrix_2.height; i++) {     // Save 1st column of 2nd matrix to the 1st processor.
         vertQueue.push(matrix_2.data[i*matrix_2.width]);
     }
-
 }
 
 /**
@@ -223,7 +225,7 @@ void procPreparation() {
 }
 
 /**
- * Function calculates for each processor its cell value.
+ * Start of algorithm. Function calculates for each processor its cell value.
 */
 void meshMult() {
     int horizCell, vertCell;
