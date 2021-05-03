@@ -104,6 +104,9 @@ Matrix loadMatrix(std::string filename, int ord) {
 
     int number;
     while (std::getline(file, line)) {      // For each row of matrix
+        if (line.empty())
+            continue;
+
         std::stringstream lineStream(line);
 
         // Inspired: https://stackoverflow.com/questions/20659066/parse-string-to-vector-of-int
