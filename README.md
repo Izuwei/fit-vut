@@ -2,6 +2,8 @@
 
 ##### VAROVÁNÍ: Zdrojové kódy jsou určeny pouze ke studijním účelům, nikoliv ke kopírování! Plagiátorství je na FIT VUT přísně trestáno.
 
+# Bakalářské studium
+
 ## 1BIT - První semestr
 ### IEL - Elektronika pro informační technologie
 >Projekt: 11/12b  
@@ -58,8 +60,29 @@
 
 ## 5BIT - Pátý semestr
 ### IMP - Mikroprocesorové a vestavěné systémy
-> Projekt - Countdown se 7-segmentovým displejem: 14/14b  
+>Projekt - Countdown se 7-segmentovým displejem: 14/14b  
 ### IMS - Modelování a simulace
-> Projekt - Hraboši: 12/20b  
+>Projekt - Hraboši: 12/20b  
 ### ISA - Síťové aplikace a správa sítí
-> Projekt - DNS resolver: 17,5/20b
+>Projekt - DNS resolver: 17,5/20b  
+
+# Magisterské studium
+
+## 1MIT - První semestr
+### AVS - Architektury výpočetních systémů
+>Projekt - Paralelizace s OpenMP: 24,5/25b  
+### MSP - Statistika a pravděpodobnost
+>Projekt - 10/10b  
+### SUI - Umělá inteligence a strojové učení
+>Projekt - 20/20b  
+
+## 2MIT - Druhý semestr
+### FLP - Funkcionální a logické programování
+>1. Projekt - plg-2-nka: 12/12b  
+>2. Projekt - Rubikova kostka: 8/8b  
+### PRL - Paralelní a distribuované algoritmy
+>1. Projekt - Pipeline Merge Sort: 9/10b  
+>2. Projekt - Mesh Multiplication: 8/10b  
+### WAP - Internetové aplikace
+>1. Projekt - Objekty v jazyce JavaScript: 13/15b  
+>2. Proejkt - Organizátor schůzek: 25/25b  
