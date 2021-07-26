@@ -43,3 +43,23 @@
 >2. Projekt - Malloc: 10/10b  
 ### ISS - Signály a systémy
 >Projekt - 11/12b  
+
+## 4BIT - Čtvrtý semestr
+### IDS - Databázové systémy
+>Projekt - 30/34b  
+### IPK - Počítačové komunikace a sítě
+>1. Projekt - Klient pro OpenWeatherMap API: 18/20b  
+>2. Projekt - Scanner síťových služeb: 11/20b  
+### IPP - Principy programovacích jazyků a OOP
+>1. Projekt - PHP 7.3: 8,8/7b  
+>2. Projekt - Python 3.6: 13/13b  
+### ITS - Testování a dynamická analýza
+>Projekt - 19/20b  
+
+## 5BIT - Pátý semestr
+### IMP - Mikroprocesorové a vestavěné systémy
+> Projekt - Countdown se 7-segmentovým displejem: 14/14b  
+### IMS - Modelování a simulace
+> Projekt - Hraboši: 12/20b  
+### ISA - Síťové aplikace a správa sítí
+> Projekt - DNS resolver: 17,5/20b
