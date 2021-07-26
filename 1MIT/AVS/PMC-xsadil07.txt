@@ -1,0 +1,120 @@
+Architektury Výpočetních Systémů (AVS 2020)
+Projekt č. 2 (PMC)
+Login: xsadil07
+
+Úloha 1: Paralelizace původního řešení
+===============================================================================
+
+1) Kterou ze smyček (viz zadání) je vhodnější paralelizovat a co způsobuje 
+   neefektivitu paralelizaci té druhé?
+   
+   Výhodnější je paralelizovat první smyčku (v metodě marchCubes), 
+   kde jsme zrychlili běh programu nad "bun_zipper_res4.pts" z původních 
+   1597 ms na cca 80-230 ms. Paralelizace druhé smyčky naopak dobu běhu 
+   programu akorát prodloužila. Neefektivitu paralelizace druhé smyčky 
+   způsobuje režie spojená s paralelizací, jelikož samotné operace v této 
+   smyčce jsou primitivní, jedná se spíše o zátěž na krátký a jednoduchý 
+   úsek kódu.
+
+2) Jaké plánování (rozdělení práce mezi vlákna) jste zvolili a proč? 
+   Jaký vliv má velikost "chunk" při dynamickém plánování (8, 16, 32, 64)?
+   
+   Zvolil jsem statické plánování, protože každá iterace vyžaduje zhruba 
+   stejné množství práce. Velikost "chunk" v dynamickém plánování umožňuje 
+   rozdělit iteraci na kusy (bloky) práce o dané velikosti jednotlivým vláknům. 
+   Po testování jsem nezaznamenal v tomto případě žádné větší změny.
+
+3) Jakým způsobem zajišťujete ukládání trojúhelníků z několika vláken současně?
+   
+   Ukládání trojúhelníku je provedeno v kritické sekci označené 
+   pragmou "#omp pragma critical" v metodě "emitTriangle". 
+   Tedy ukládání jednotlivých trojúhelníků je prováděno 
+   výlučně tzn. v daný okamžik přistupuje ke sdílenému zdroji 
+   jedno vlákno - ostatní čekají (je tak zachována konzistence dat).
+
+Úloha 2: Paralelní průchod stromem
+===============================================================================
+
+1) Stručně popište použití OpenMP tasků ve vašem řešení.
+
+   Paralelizace začíná voláním "recursiveMarchCubes" v metodě "marchCubes". 
+   První volání je provedeno pouze jedním vláknem pomocí "#pragma omp single", 
+   dále se provádí rekurzivní dělení prostoru na 8 částí, kde se pro každou část 
+   tohoto prostoru vytváří nový task. Důležité je definování sdílené proměnné, 
+   aby tasky mohli měnit její obsah, jelikož defaultně jsou všechny 
+   privátní - změna (increment) hodnoty je pak prováděna atomicky. 
+   Nakonec je použita pragma "omp taskwait", která zajistí čekání na 
+   podtasky daného tasku.
+
+2) Jakým způsobem jste realizovali sesbírání celkového počtu trojúhelníků?
+
+   Rekurzivně volaná metoda "recursiveMarchCubes" vrací svému předešlému 
+   volání počet trojúhelníků z funkce "buildCube" pokud bylo dosaženo definované 
+   hloubky, 0 pokud je daný blok prázdný, jinak je prostor rekurzivně dělen na 
+   menší části, kde počet trojúhelníků těchto částí je sčítán ve sdílené promněné 
+   pro jednotlivé subtasky daného tasku. Před návratem hodnoty je nutné počkat na 
+   doběhnutí všech subtasku.
+
+3) Jaký vliv má na vaše řešení tzv. "cut-off"? Je vhodné vytvářet nový 
+   task pro každou krychli na nejnižší úrovni?
+
+   Hodnotu "cut-off" jsem nastavil na 1. Pokud je hodnota menší může nastat, že 
+   některé trojúhelníky budou započteny vícekrát, naopak pokud je větší, nemusí 
+   být vytvořeny všechny trojúhelníky. Vytvářet nový task pro krychle na nejnižší 
+   úrovní je výhodné, pokud dochází k efektivní paralelizaci.
+
+4) Jakým způsobem zajišťujete ukládání trojúhelníků z několika vláken současně?
+
+   Stejně jako v první úloze (metoda emitTriangle). Uložení je provedeno v kritické 
+   sekci pomocí synchronizace vzájemným vyloučením, tedy jedno vlákno 
+   zapisuje do sdíleného zdroje, ostatní čekají.
+
+Úloha 3: Předvýpočet hodnot pole
+===============================================================================
+
+1) Dochází v případě tohoto řešení k omezení výkonu propustností paměti? 
+   Došlo k nějakým změnám ve využití paměťového subsystému v porovnání 
+   s úlohou 1?
+   (Ověřte nástrojem Intel VTune na některé z větších mřížek -- např. 512)
+
+   Ano, omezení výkonu popustnosti pamětí (tzv. memory bound) v tomto případě 
+   je poměrně vysoké cca 10% oproti řešení v první úloze, kde memory bound 
+   dosahuje hodnoty přibližně 0.5%. Hodnoty byly naměřeny pomoci nástroje VTune 
+   nad daty "bun_zipper_res4.pts" s velikosti mřížky 512.
+
+2) V jaké situaci bude toto řešení nejvýhodnější (nejrychlejší)?
+
+   V případě většího vstupního souboru - velkých, složitých objektů, které 
+   obsahují velké množství trojúhelníků.
+
+Úloha 4: Grafy škálování všech řešení
+===============================================================================
+
+1) Stručně zhodnoťte efektivitu vytvořených řešení (na základě grafů škálování).
+
+   Z grafu škálování podle velikosti mřížky je patrné, že cached algoritmus je 
+   nejefektivnější, pro malou mřížku je také velmi efektivní stromový algoritmus,
+   který se mu velmi podobá. Loop řešení je v tomto případě nejméně efektivní než 
+   oba předchozí.
+   V grafu slabého škálování lze zaznamenat, že u stromového algoritmu roste 
+   výpočetní čas s rostoucím počtem vláken, algoritmy cached a loop mají tuto 
+   závislost přibližně konstatní, kromě případů s malým vstupem, kde dochází 
+   k výkyvu. 
+   V grafu silného škálování je patrné, že pro dostatečně malý vstup je výhodný 
+   stromový algoritmus, pro větší vstup je pak výhodnější použít algoritmus cached. 
+   Algoritmus loop je v tomto případě opět nejméně efektivní. Ve všech případech 
+   je patrné, že s rostoucím počtem vláken se výpočetní čas snižuje (až na malé 
+   vyjímky).
+
+2) V jakém případě (v závislosti na počtu bodů ve vstupním souboru a velikosti 
+   mřížky) bude vaše řešení 1. úlohy neefektivní? (pokud takový případ existuje)
+
+   Řešení 1. úlohy bude neefektivní, pokud bude malá velikost vstupního souboru 
+   a velký počet vláken.
+
+3) Je (nebo není) stromový algoritmus efektivnější z pohledu slabého škálování 
+   vzhledem ke vstupu?
+
+   Stromový algoritmus je nejefektivnější (z pohledu slabého škálování) zejména 
+   při malém vstupu a malém počtu vláken. Při velkém vstupním souboru pak lze 
+   zaznamenat lepší výsledky u 3. řešení - tedy u algoritmu cached.
