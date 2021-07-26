@@ -1,0 +1,1 @@
+# Objekty v jazyce JavaScript  
