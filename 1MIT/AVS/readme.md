@@ -1,0 +1,1 @@
+# Paralelizace s OpenMP  
