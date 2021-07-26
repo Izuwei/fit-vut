@@ -1,0 +1,28 @@
+CREATE DATABASE WAP;
+CREATE TABLE WAP.Schuzky (
+    SchuzkaID INT AUTO_INCREMENT PRIMARY KEY,
+    Nazev varchar(150) COLLATE utf8_general_ci,
+    DatumSmazani DATE
+);
+
+CREATE TABLE WAP.Terminy (
+    TerminID INT AUTO_INCREMENT PRIMARY KEY,
+    Cas DATETIME,
+    SchuzkaID INT,
+    PocetHlasu INT,
+    FOREIGN KEY (SchuzkaID) REFERENCES WAP.Schuzky(SchuzkaID) ON DELETE CASCADE
+);
+INSERT INTO `schuzky` (`Nazev`, `DatumSmazani`) VALUES ('test', '2021-05-21');
+INSERT INTO terminy (`Cas`, `SchuzkaID`, PocetHlasu) VALUES ('2021-04-21 13:00:00',1,5);
+INSERT INTO terminy (`Cas`, `SchuzkaID`, PocetHlasu) VALUES ('2021-04-21 14:00:00',1,5);
+INSERT INTO terminy (`Cas`, `SchuzkaID`, PocetHlasu) VALUES ('2021-04-21 15:00:00',1,5);
+INSERT INTO terminy (`Cas`, `SchuzkaID`, PocetHlasu) VALUES ('2021-04-22 13:00:00',1,5);
+INSERT INTO terminy (`Cas`, `SchuzkaID`, PocetHlasu) VALUES ('2021-04-22 14:00:00',1,5);
+INSERT INTO terminy (`Cas`, `SchuzkaID`, PocetHlasu) VALUES ('2021-04-22 15:00:00',1,5);
+
+SET GLOBAL event_scheduler = ON;
+CREATE EVENT AutoDeleteSchuzky
+ON SCHEDULE AT CURRENT_TIMESTAMP + INTERVAL 1 DAY
+ON COMPLETION PRESERVE
+DO
+DELETE FROM wap.schuzky WHERE DatumSmazani < NOW();
