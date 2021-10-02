@@ -29,9 +29,6 @@
 >6. Projekt: 5/5b  
 >7. Projekt: 5/5b  
 >8. Projekt: 5/5b  
-### ITW - Tvorba webových stránek
->1. Projekt: 20/20b  
->2. Projekt: 29/30b  
 
 ## 3BIT - Třetí semestr
 ### IAL - Algoritmy
