@@ -1,5 +1,6 @@
 ######################################################################################################
-# PDI - Projekt (Zpracování IPFIX dat v prostředí Apache Spark)
+# Prostředí distribuovaných aplikací (PDI)
+# Projekt - Zpracování IPFIX dat v prostředí Apache Spark
 # autori: Lukas Havlicek (xhavli46), Jaroslav Katrusak (xkatru00), Jakub Sadilek (xsadil07)
 # readme.txt
 ######################################################################################################
