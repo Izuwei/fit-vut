@@ -9,9 +9,9 @@
 >Projekt: 11/12b  
 
 ### IZP - Základy programování
->1. Projekt - Práce s textem: 4,7/5b  
->2. Projekt - Interační výpočty: 6,68/7b  
->3. Projekt - Jednoduchá shluková analýza: 7,4/10b  
+>1. Projekt - Práce s textem: 4.7/5b  
+>2. Projekt - Interační výpočty: 6.68/7b  
+>3. Projekt - Jednoduchá shluková analýza: 7.4/10b  
 
 ## 2BIT - Druhý semestr
 
@@ -50,7 +50,7 @@
 >1. Projekt - Klient pro OpenWeatherMap API: 18/20b  
 >2. Projekt - Scanner síťových služeb: 11/20b  
 ### IPP - Principy programovacích jazyků a OOP
->1. Projekt - PHP 7.3: 8,8/7b  
+>1. Projekt - PHP 7.3: 8.8/7b  
 >2. Projekt - Python 3.6: 13/13b  
 ### ITS - Testování a dynamická analýza
 >Projekt - 19/20b  
@@ -61,13 +61,13 @@
 ### IMS - Modelování a simulace
 >Projekt - Hraboši: 12/20b  
 ### ISA - Síťové aplikace a správa sítí
->Projekt - DNS resolver: 17,5/20b  
+>Projekt - DNS resolver: 17.5/20b  
 
 # Magisterské studium
 
 ## 1MIT - První semestr
 ### AVS - Architektury výpočetních systémů
->Projekt - Paralelizace s OpenMP: 24,5/25b  
+>Projekt - Paralelizace s OpenMP: 24.5/25b  
 ### MSP - Statistika a pravděpodobnost
 >Projekt - 10/10b  
 ### SUI - Umělá inteligence a strojové učení
@@ -82,4 +82,11 @@
 >2. Projekt - Mesh Multiplication: 8/10b  
 ### WAP - Internetové aplikace
 >1. Projekt - Objekty v jazyce JavaScript: 13/15b  
->2. Proejkt - Organizátor schůzek: 25/25b  
+>2. Projekt - Organizátor schůzek: 25/25b  
+
+## 2MIT - Třetí semestr
+### PDI - Prostředí distribuovaných aplikací
+>Projekt - Zpracování IPFIX dat v prostředí Apache Spark: 15/20b  
+### PCG - Paralelní výpočty na GPU
+>1. Projekt - Implementace CUDA algoritmu: 16/20b  
+>2. Projekt - Implementace OpenACC kódu: 7.5/10b  
