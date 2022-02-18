@@ -84,7 +84,7 @@
 >1. Projekt - Objekty v jazyce JavaScript: 13/15b  
 >2. Projekt - Organizátor schůzek: 25/25b  
 
-## 2MIT - Třetí semestr
+## 3MIT - Třetí semestr
 ### PDI - Prostředí distribuovaných aplikací
 >Projekt - Zpracování IPFIX dat v prostředí Apache Spark: 15/20b  
 ### PCG - Paralelní výpočty na GPU
