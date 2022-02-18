@@ -1,0 +1,114 @@
+Paralelní programování na GPU (PCG 2021)
+Projekt c. 1 (cuda)
+Login: xsadil07
+
+
+Krok 0: základní implementace (512 blok)
+=============================
+Velikost dat    	čas [s]
+n=10 25600          15.86
+n=11 28160          17.43
+n=12 30720          19.04
+n=13 33280          20.57
+n=14 35840          22.20
+n=15 38400          23.78
+n=16 40960          25.24
+n=17 43520          36.90
+n=18 46080          39.07
+n=19 48640          41.23
+n=20 51200          43.40
+n=21 53760          45.63
+n=22 56320          47.77
+n=23 58880          49.90
+n=24 61440          52.09
+n=25 64000          54.27
+
+5 * n * 512
+Pro n 10 az 25
+
+Vyskytla se nějaká anomálie v datech
+Pokud ano, vysvětlete:
+Ano, při velikosti vstupu n=17 dojde k velkému nárustu výpočetního času oproti 
+předchozímu kroku. Tento jev je nejspíše dám tím, že v přechozích krocích bylo 
+dostatek dat na to, aby se bloky rozložili na všechny SM procesory. V tomto 
+kroku (n=17) už bylo nutné přiřadit 2 (nebo více) bloků na 1 SM procesor a tím
+danému procesoru přibylo více práce a celý proces zdržel.
+
+Krok 1: optimalizace kódu
+=====================
+Došlo ke zrychlení?
+Ano, běh sample dat zabral 1.8s oproti step0 kde zabral 2.56s.
+Při větší velikosti dat 64000 (n=25) došlo pak ke zrychlení 
+na 41.63s z původních 54.27s ve step0.
+
+Popište hlavní důvody:
+Hlavní důvodem je sloučení kernelů do jednoho. Tímto krokem jsme ušetřili
+čas spojený s režii jejich vytvářením. Dále není nutné data neustále přenášet
+a zejména pro ně opakovaně sahat do globální paměti.
+
+Porovnejte metriky s předchozím krokem:
+Kernel                         | FLOP Efficiency | Multiprocessor Activity | Global Load Transactions | Floating Point Operations
+calculate_collision_velocity   | 2.07 %          | 9.91 %                  | 2102272                  |  301985792                
+calculate_gravitation_velocity | 3.48 %          | 9.98 %                  | 2100736                  | 2264506188                
+update_particle                | 0.04 %          | 2.95 %                  |    6144                  |      36864               
+-------------------------------+-----------------+-------------------------+--------------------------+--------------------------
+calculate_velocity             | 4.06 %          | 39.77 %                 | 2102272                  | 2314874700
+
+V tabulce výše lze vidět hlavní rozdíly, které měli vliv na výkon. Zejména se zvýšila 
+aktivita multiprocesoru a počet dat načtených z globální paměti se snížil na polovinu.
+
+Krok 2: sdílená paměť
+=====================
+Došlo ke zrychlení?
+Ano, běh sample dat zabral 1.76s oproti step1 kde zabral 1.8s.
+Při větší velikosti dat 64000 (n=25) došlo pak ke zrychlení 
+na 41.2s z původních 41.63s ve step1. Tedy zrychlení už není tak velké. 
+Ovšem s větší velikostí dat roste i časový rozdíl, tedy lze očekávat,
+že u velkého množství dat dojde k velkému zrychlení.
+
+Zdůvodněte:
+Byl snížen celkový počet přístupů do globální paměti, tím, že byla data 
+ukládána do sdílené paměti. Tato paměť může být velmi rychlá pokud je do ní 
+správně přistupováno.
+
+Porovnejte metriky s předchozím krokem:
+Kernel                     | Global Load Transactions | Shared Load Transactions
+calculate_velocity (step1) | 2102272                  | 0
+---------------------------+--------------------------+--------------------------
+calculate_velocity (step2) |  119808                  | 2097152
+
+V tabulce můžeme pozorovat drastické snížení transakcí v globální paměti. Data v ní
+se používají pouze nazačátku a na konci při komunikaci s CPU. Všechny transakce během
+výpočtu jsou pak proveděny ve sdílené paměti.
+
+Krok 5: analýza výkonu (step 500, blok 128)
+======================
+N            čas CPU [s]    čas GPU [s]    propustnost paměti [MB/s]    výkon [MFLOPS]    zrychlení [-]
+   2048            33.59          0.94           530                         307794           35
+   4096           134.57          1.83          1000                         632496           73
+   8192           562.47          3.59          1984                        1251403          156
+  16384         ~2248.88          7.48          3744                        2421111          301
+  32768         ~8995.52         16.81          6651                        4407198          562
+  65536        ~35983.08         42.62         10455                        7053308          856
+ 131072       ~143932.32        203.53          9576                        6824202          709
+ 262144       ~575728.28        614.20         11436                        7722557          937
+ 524288      ~2302914.12       2457.88         11642                        7945723          937
+1048576      ~9211658.48       9859.32        ~11861                       ~8001548          934
+
+2^n * 1024
+Pro n 1 az 10
+
+Od jakého počtu částic se vyplatí počítat na grafické kartě?
+Podle výsledků uvedených ve vyšší tabulce se vyplatí počítat na GPU vždy.
+
+Krok 5: bonus - srovnání grafických karet
+======================
+N             čas GPU 1 [s]   propustnost 1 [MB/s]    výkon 1 [MFLOPS]   čas GPU 2 [s]  propustnost 2 [MB/s]    výkon 2 [MFLOPS]
+2^n * 1024    ...             ...                     ...                ...            ...                     ...
+...           ...             ...                     ...                ...            ...                     ...
+Pro n 1 az 10 ...             ...                     ...                ...            ...                     ...
+
+
+Porovnejte grafické karty z hlediska výkonu a propustnosti paměti.
+
+===================================
