@@ -1,0 +1,115 @@
+/**
+ * @file      main.cpp
+ *
+ * @author    Jakub Sadilek \n
+ *            Faculty of Information Technology \n
+ *            Brno University of Technology \n
+ *            xsadil07@stud.fit.vutbr.cz
+ *
+ * @brief     PCG Assignment 2
+ *            N-Body simulation in ACC
+ *
+ * @version   2021
+ *
+ * @date      11 November  2020, 11:22 (created) \n
+ * @date      16 November  2021, 15:09 (revised) \n
+ *
+ */
+
+
+Krok 1: základní implementace
+===============================================================================
+Velikost dat    	čas [s]
+1 x 1024          0.033000 s
+2 x 1024          0.067000 s
+3 x 1024          0.116000 s
+4 x 1024          0.184000 s
+5 x 1024          0.266000 s
+6 x 1024          0.366000 s
+7 x 1024          0.483000 s
+8 x 1024          0.624000 s
+9 x 1024          0.782000 s
+10 x 1024         0.954000 s
+11 x 1024         1.141000 s
+12 x 1024         1.346000 s
+13 x 1024         1.576000 s
+14 x 1024         1.812000 s
+15 x 1024         2.072000 s
+16 x 1024         2.346000 s
+17 x 1024         2.646000 s
+18 x 1024         2.948000 s
+19 x 1024         3.285000 s
+20 x 1024         3.620000 s
+21 x 1024         3.986000 s
+22 x 1024         4.385000 s
+23 x 1024         4.758000 s
+24 x 1024         5.227000 s
+25 x 1024         5.661000 s
+26 x 1024         6.110000 s
+27 x 1024         6.582000 s
+28 x 1024         7.102000 s
+29 x 1024         7.640000 s
+30 x 1024         8.169000 s
+
+Vyskytla se nějaká anomálie v datech
+Pokud ano, vysvětlete:
+
+Vypadá to, že se žádná anomálie nevyskytla. Čas začíná na 0.03s a s každou iterací lehce roste.
+
+Krok 2: optimalizace kódu
+===============================================================================
+Došlo ke zrychlení?
+
+Ano, ke zrychlení došlo při výpočtu nad větší velikostí vstupních dat (26. iterace a dále).
+
+Popište dva hlavní důvody:
+
+- Menší režie při spouštění kernelů (méně transakcí nad globální paměti GPU).
+- Netřeba provádět více smyček sekvenčně zasebou, ale celý výpočet je možno prádět ve dvou
+  vnořených smyčkách, což vede i k optimalizaci výrazů.
+
+Porovnejte metriky s předchozím krokem:
+Kernel                         | FLOP Efficiency | Multiprocessor Activity | Global Load Transactions | Floating Point Operations
+calculate_collision_velocity   | 12.79 %         | 96.06 %                 | 8642560                  | 303538176                
+calculate_gravitation_velocity | 25.45 %         | 96.35 %                 | 8531968                  | 673075200                
+update_particle                |  0.01 %         |  1.12 %                 |    6180                  |     36864               
+-------------------------------+-----------------+-------------------------+--------------------------+--------------------------
+calculate_velocity             | 3.02 %          | 39.68 %                 | 2103936                  | 738136064
+
+(Pozn. Měřeno na výchozích datech, která jsou poměrně malá, s většími daty by se efektivnost měla stupňovat.)
+
+Krok 3: Težiště
+===============================================================================
+Kolik kernelů je nutné použít k výpočtu?
+
+Jeden.
+
+Kolik další paměti jste museli naalokovat?
+
+Žádnou.
+
+Jaké je zrychelní vůči sekveční verzi?
+(provedu to smyčkou #pragma acc parallel loop seq)
+Zdůvodněte:
+
+Při sekvenční verzi na 100 milionech částicích byl naměřen čas 0.118s 
+a s redukcí čas 0.002s, tedy výsledné zrychlení je 59 krát.
+
+Krok 4: analýza výkonu
+================================================================================
+N        čas CPU [s]    čas GPU [s]    propustnost paměti [MB/s]    výkon [MFLOPS]    zrychlení [-]
+  1024          1.12           0.22                         1272            103878             5.09  
+  2048          1.74           0.41                         2531            225022             4.24
+  4096          3.53           0.82                         5047            450082             4.30
+  8192         13.94           1.58                        10127            934388             8.82
+ 16384         55.26           3.48                        18223           1696982            15.87
+ 32768        220.50           8.54                        29442           2766042            25.81
+ 65536        882.46          38.22                        27975           2472265            23.08
+131072       3552.62         131.29                        33183           2878779            27.05
+
+Od jakého počtu částic se vyplatí počítat na grafické kartě?
+
+Podle výše naměřených hodnot se vždy vyplatí počítat na grafické kartě.
+(Pozn. data byla naměřena bez překrytí výpočtu pozic ve step4.)
+
+===============================================================================
