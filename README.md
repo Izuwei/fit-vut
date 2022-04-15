@@ -1,92 +1,97 @@
-# Vysoké učení technické - Fakulta informačních technologií
+# Brno University of Technology - Faculty of Information Technology
 
-##### VAROVÁNÍ: Zdrojové kódy jsou určeny pouze ke studijním účelům, nikoliv ke kopírování! Plagiátorství je na FIT VUT přísně trestáno.
+# Bachelor's degree
 
-# Bakalářské studium
+## 1BIT - First semester
 
-## 1BIT - První semestr
-### IEL - Elektronika pro informační technologie
->Projekt: 11/12b  
+### IEL - Electronics for Information Technology
+>1. Project: 11/12 points  
 
-### IZP - Základy programování
->1. Projekt - Práce s textem: 4.7/5b  
->2. Projekt - Interační výpočty: 6.68/7b  
->3. Projekt - Jednoduchá shluková analýza: 7.4/10b  
+### IZP - Introduction to Programming Systems
+>1. Project - Work with text: 4.7/5 points  
+>2. Project - Iterative calculations: 6.68/7 points  
+>3. Project - Simple cluster analysis: 7.4/10 points  
 
-## 2BIT - Druhý semestr
+## 2BIT - Second semester
 
-### INC - Návrh číslicových systémů
->Projekt - Přístupový terminál: 20/20b
-### IOS - Operační systémy
->1. Projekt - WEDI: 15/15b  
->2. Projekt - The Senate Bus Problem: 15/15b
-### ISJ - Skriptovací jazyky
->1. Projekt: 5/5b  
->2. Projekt: 5/5b  
->3. Projekt: 5/5b  
->4. Projekt: 5/5b  
->5. Projekt: 5/5b  
->6. Projekt: 5/5b  
->7. Projekt: 5/5b  
->8. Projekt: 5/5b  
+### INC - Digital Systems Design
+>1. Project - Access terminal: 20/20 points
+### IOS - Operating Systems
+>1. Project - WEDI: 15/15 points  
+>2. Project - The Senate Bus Problem: 15/15 points
+### ISJ - Scripting Languages
+>1. Project: 5/5 points  
+>2. Project: 5/5 points  
+>3. Project: 5/5 points  
+>4. Project: 5/5 points  
+>5. Project: 5/5 points  
+>6. Project: 5/5 points  
+>7. Project: 5/5 points  
+>8. Project: 5/5 points  
 
-## 3BIT - Třetí semestr
-### IAL - Algoritmy
->1. Projekt - 10/10b  
->2. Projekt - 10/10b  
-### INP - Návrh počítačových systémů
->1. Projekt - Řízení maticového displeje pomocí FPGA: 8/10b  
->2. Projekt - Procesor s Harvardskou architekturou: 23/23b  
-### IPS - Programovací seminář
->1. Projekt - Psed: 10/10b  
->2. Projekt - Malloc: 10/10b  
-### ISS - Signály a systémy
->Projekt - 11/12b  
+## 3BIT - Third semester
 
-## 4BIT - Čtvrtý semestr
-### IDS - Databázové systémy
->Projekt - 30/34b  
-### IPK - Počítačové komunikace a sítě
->1. Projekt - Klient pro OpenWeatherMap API: 18/20b  
->2. Projekt - Scanner síťových služeb: 11/20b  
-### IPP - Principy programovacích jazyků a OOP
->1. Projekt - PHP 7.3: 8.8/7b  
->2. Projekt - Python 3.6: 13/13b  
-### ITS - Testování a dynamická analýza
->Projekt - 19/20b  
+### IAL - Algorithms
+>1. Project - 10/10 points  
+>2. Project - 10/10 points  
+### INP - Design of Computer Systems
+>1. Project - Control of matrix display using FPGA: 8/10 points  
+>2. Project - Processor with Harvard architecture: 23/23 points  
+### IPS - Programming Seminar
+>1. Project - Psed: 10/10 points  
+>2. Project - Malloc: 10/10 points  
+### ISS - Signals and Systems
+>1. Project - 11/12 points  
 
-## 5BIT - Pátý semestr
-### IMP - Mikroprocesorové a vestavěné systémy
->Projekt - Countdown se 7-segmentovým displejem: 14/14b  
-### IMS - Modelování a simulace
->Projekt - Hraboši: 12/20b  
-### ISA - Síťové aplikace a správa sítí
->Projekt - DNS resolver: 17.5/20b  
+## 4BIT - Fourth semester
 
-# Magisterské studium
+### IDS - Database Systems
+>1. Project - 30/34 points  
+### IPK - Computer Communications and Networks
+>1. Project - Client for OpenWeatherMap API: 18/20 points  
+>2. Project - Network Services Scanner: 11/20 points  
+### IPP - Principles of Programming Languages and OOP
+>1. Project - Lexical and Syntactic Analysis in PHP 7.3: 8.8/7 points  
+>2. Project - Code interpreter in Python 3.6: 13/13 points  
+### ITS - Testing and Dynamic Analysis
+>1. Project - 19/20 points  
 
-## 1MIT - První semestr
-### AVS - Architektury výpočetních systémů
->Projekt - Paralelizace s OpenMP: 24.5/25b  
-### MSP - Statistika a pravděpodobnost
->Projekt - 10/10b  
-### SUI - Umělá inteligence a strojové učení
->Projekt - 20/20b  
+## 5BIT - Fifth semester
 
-## 2MIT - Druhý semestr
-### FLP - Funkcionální a logické programování
->1. Projekt - plg-2-nka: 12/12b  
->2. Projekt - Rubikova kostka: 8/8b  
-### PRL - Paralelní a distribuované algoritmy
->1. Projekt - Pipeline Merge Sort: 9/10b  
->2. Projekt - Mesh Multiplication: 8/10b  
-### WAP - Internetové aplikace
->1. Projekt - Objekty v jazyce JavaScript: 13/15b  
->2. Projekt - Organizátor schůzek: 25/25b  
+### IMP - Microprocessors and Embedded Systems
+>1. Project - Countdown with 7-segment display: 14/14 points  
+### IMS - Modelling and Simulation
+>1. Project - Simulation of vole crisis: 12/20 points  
+### ISA - Network Applications and Network Administration	
+>1. Project - DNS resolver: 17.5/20 points  
 
-## 3MIT - Třetí semestr
-### PDI - Prostředí distribuovaných aplikací
->Projekt - Zpracování IPFIX dat v prostředí Apache Spark: 15/20b  
-### PCG - Paralelní výpočty na GPU
->1. Projekt - Implementace CUDA algoritmu: 16/20b  
->2. Projekt - Implementace OpenACC kódu: 7.5/10b  
+# Master's degree
+
+## 1MIT - First semester
+
+### AVS - Computation Systems Architectures
+>1. Project - Parallelization with OpenMP: 24.5/25 points  
+### MSP - Statistics and Probability
+>1. Project - 10/10 points  
+### SUI - Artificial Intelligence and Machine Learning
+>1. Project - 20/20 points  
+
+## 2MIT - Second semester
+
+### FLP - Functional and Logic Programming
+>1. Project - plg-2-nka: 12/12 points  
+>2. Project - Rubik's cube solver: 8/8 points  
+### PRL - Parallel and Distributed Algorithms
+>1. Project - Pipeline Merge Sort: 9/10 points  
+>2. Project - Mesh Multiplication: 8/10 points  
+### WAP - Internet Applications
+>1. Project - JavaScript objects: 13/15 points  
+>2. Project - Meetings organizer: 25/25 points  
+
+## 3MIT - Third semester
+
+### PDI - Distributed Application Environment
+>1. Project - Processing of IPFIX data in Apache Spark environment: 15/20 points  
+### PCG - Parallel Computations on GPU
+>1. Project - Implementation of CUDA algorithm: 16/20 points  
+>2. Project - Implementation of OpenACC code: 7.5/10 points  
